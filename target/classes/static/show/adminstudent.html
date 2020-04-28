@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>学生管理</title>
+  <link rel="stylesheet" href="/stuinfo/layui/css/layui.css">
+  <script src="/stuinfo/layui/layui.js"></script>
+  <script src="/stuinfo/js/vue.js"></script>
+  <script src="/stuinfo/js/jquery.min.js"></script>
+  <style>
+    a:hover {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<table class="layui-table" id="table_id" style="margin: 0px;">
+  <tbody>
+  <tr>
+    <td style="width: 200px;vertical-align: baseline;padding: 0px;background-color: #393D49">
+      <ul style="width: 100%" class="layui-nav layui-nav-tree" lay-filter="test">
+        <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+        <li class="layui-nav-item layui-nav-itemed">
+          <a href="javascript:;">数据录入</a>
+          <dl class="layui-nav-child">
+            <dd><a id="a_base_info_id">基本信息录入</a></dd>
+            <dd><a id="a_archive_id">学生档案录入</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item">
+          <a href="javascript:;">数据查询</a>
+          <dl class="layui-nav-child">
+            <dd><a id="a_base_info_query_id">基本信息查询</a></dd>
+            <dd><a id="a_archive_query_id">档案查询</a></dd>
+          </dl>
+        </li>
+        <!--        <li class="layui-nav-item"><a href="">产品</a></li>-->
+        <!--        <li class="layui-nav-item"><a href="">大数据</a></li>-->
+      </ul>
+    </td>
+    <td>
+      <iframe id="iframe_id" style="width:100%; height: 100%;border: 0;"></iframe>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<script>
+  $('#table_id').css('height', window.innerHeight + 'px');
+
+  //注意：导航 依赖 element 模块，否则无法进行功能性操作
+  layui.use('element', function () {
+    var element = layui.element;
+  });
+</script>
+</body>
+<script>
+  var jumpPageToIframe = function (eleId, src) {
+    $('#' + eleId).on('click', () => {
+      document.getElementById('iframe_id').src = src;
+    });
+  };
+  /**
+   * 数据录入链接
+   */
+  jumpPageToIframe("a_base_info_id", '/stuinfo/manager/input_stu_info.html');
+  jumpPageToIframe("a_archive_id", '/stuinfo/manager/input_s_archive.html');
+  /**
+   * 数据查询连接
+   */
+  jumpPageToIframe('a_base_info_query_id', '/stuinfo/manager/input_st_info.html');
+  jumpPageToIframe('a_archive_query_id', '/stuinfo/manager/input_st_info.html');
+</script>
+</html>

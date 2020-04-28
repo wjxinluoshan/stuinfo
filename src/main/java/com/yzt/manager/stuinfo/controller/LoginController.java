@@ -18,7 +18,7 @@ public class LoginController {
   /**
    * 登录
    */
-  @PostMapping("/l")
+  @PostMapping("/lsort")
   @ResponseBody
   public String login(Login login) {
     return loginMapperImple.login(login);

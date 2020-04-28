@@ -10,6 +10,23 @@ public class StuInfo {
   private Integer college=null;
   private Integer depart=null;
   private String phone=null;
+  private String inSchoolYear=null;
+
+  public void setDepart(Integer depart) {
+    this.depart = depart;
+  }
+
+  public String getInSchoolYear() {
+    return inSchoolYear;
+  }
+
+  public void setInSchoolYear(String inSchoolYear) {
+    this.inSchoolYear = inSchoolYear;
+  }
+
+  public void setCollege(Integer college) {
+    this.college = college;
+  }
 
   public String getStuClass() {
     return stuClass;

@@ -1,7 +1,9 @@
 package com.yzt.manager.stuinfo.config;
 
+import com.yzt.manager.stuinfo.mapper.LoginMapper;
 import com.yzt.manager.stuinfo.mapper.SchoolInfoMapper;
 import com.yzt.manager.stuinfo.mapper.StuAndTeacInfoMapper;
+import com.yzt.manager.stuinfo.mapperimpl.LoginMapperImple;
 import javax.sql.DataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -44,6 +46,11 @@ public class DatabaseConfig {
   @Bean
   public StuAndTeacInfoMapper stuAndTeacInfoMapper(SqlSessionTemplate sqlSessionTemplate) {
     return sqlSessionTemplate.getMapper(StuAndTeacInfoMapper.class);
+  }
+
+  @Bean
+  public LoginMapper loginMapper(SqlSessionTemplate sqlSessionTemplate) {
+    return sqlSessionTemplate.getMapper(LoginMapper.class);
   }
 
 }

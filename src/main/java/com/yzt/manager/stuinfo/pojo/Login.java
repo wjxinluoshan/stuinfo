@@ -2,9 +2,12 @@ package com.yzt.manager.stuinfo.pojo;
 
 public class Login {
 
-  private String userNumber;
-  private String password;
-  private String mark;
+  private String userNumber=null;
+  private String password=null;
+
+  //标识当前登录者的身份：
+  // 0:学生   1：老师  2：admin（管理员）
+  private String mark=null;
 
   public String getUserNumber() {
     return userNumber;

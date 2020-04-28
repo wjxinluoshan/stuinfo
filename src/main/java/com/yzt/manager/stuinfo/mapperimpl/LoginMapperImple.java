@@ -2,25 +2,41 @@ package com.yzt.manager.stuinfo.mapperimpl;
 
 import com.yzt.manager.stuinfo.mapper.LoginMapper;
 import com.yzt.manager.stuinfo.pojo.Login;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LoginMapperImple implements LoginMapper {
 
+  @Autowired
+  private LoginMapper loginMapper;
+
   @Override
   public String login(String userNumber, String password, String isTeacher) {
-    return null;
+    return loginMapper.login(userNumber, password, isTeacher);
+  }
+
+  @Override
+  public String adminLogin(String accountName, String password) {
+    return loginMapper.adminLogin(accountName, password);
   }
 
   public String login(Login login) {
     //得到登录时的标志位
     String mark = login.getMark();
     //判断当卡登录者得身份
-    if (mark.equals("0")) {
+    switch (mark) {
       //学生
-      return login(login.getUserNumber(), login.getPassword(), null);
+      case "0":
+        return login(login.getUserNumber(), login.getPassword(), null);
+      //老师
+      case "1":
+        return login(login.getUserNumber(), login.getPassword(), mark);
+      //admin
+      case "2":
+        return adminLogin(login.getUserNumber(), login.getPassword());
     }
-    //老师
-    return login(login.getUserNumber(), login.getPassword(), mark);
+    return null;
   }
 }
+

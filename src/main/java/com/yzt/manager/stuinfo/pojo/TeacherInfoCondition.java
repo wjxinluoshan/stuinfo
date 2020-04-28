@@ -1,0 +1,36 @@
+package com.yzt.manager.stuinfo.pojo;
+
+public class TeacherInfoCondition {
+
+  /**
+   * stuNumber : stuClass : college : 0 depart : 1
+   */
+
+  private String teacherNumber=null;
+  private Integer college=null;
+  private Integer depart=null;
+
+  public String getTeacherNumber() {
+    return teacherNumber;
+  }
+
+  public void setTeacherNumber(String teacherNumber) {
+    this.teacherNumber = teacherNumber;
+  }
+
+  public int getCollege() {
+    return college;
+  }
+
+  public void setCollege(int college) {
+    this.college = college;
+  }
+
+  public int getDepart() {
+    return depart;
+  }
+
+  public void setDepart(int depart) {
+    this.depart = depart;
+  }
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>管理员</title>
+  <link rel="stylesheet" href="/stuinfo/layui/css/layui.css">
+  <script src="/stuinfo/layui/layui.js"></script>
+  <script src="/stuinfo/js/vue.js"></script>
+  <script src="/stuinfo/js/jquery.min.js"></script>
+</head>
+<body>
+<ul style="text-align: center" class="layui-nav" id="nav_id" lay-filter="">
+  <li class="layui-nav-item layui-this"><a id="a_welcom">欢迎页面</a></li>
+  <li class="layui-nav-item"><a id="a_teacher">教师</a></li>
+  <li class="layui-nav-item"><a id="a_student">学生</a></li>
+  <li class="layui-nav-item"><a id="a_school">学校管理</a></li>
+  <!--  <li class="layui-nav-item"><a href="">大数据</a></li>-->
+  <!--  <li class="layui-nav-item">-->
+  <!--    <a href="javascript:;">解决方案</a>-->
+  <!--    <dl class="layui-nav-child"> &lt;!&ndash; 二级菜单 &ndash;&gt;-->
+  <!--      <dd><a href="">移动模块</a></dd>-->
+  <!--      <dd><a href="">后台模版</a></dd>-->
+  <!--      <dd><a href="">电商平台</a></dd>-->
+  <!--    </dl>-->
+  <!--  </li>-->
+  <!--  <li class="layui-nav-item"><a href="">社区</a></li>-->
+</ul>
+<iframe id="iframe_id" width="100%" src="/stuinfo/html/welcom.html?type=0"></iframe>
+<script>
+  //注意：导航 依赖 element 模块，否则无法进行功能性操作
+  layui.use('element', function () {
+    var element = layui.element;
+
+    //…
+  });
+</script>
+</body>
+<script>
+  $('#iframe_id').css('height', window.innerHeight - $('#nav_id').height() + 'px');
+
+  var jumpPageToIframe = function (eleId, src) {
+    $('#' + eleId).on('click', () => {
+      document.getElementById('iframe_id').src = src;
+    });
+  };
+  /**
+   *欢迎页面
+   */
+  jumpPageToIframe('a_welcom', '/stuinfo/html/welcom.html?type=0');
+  /**
+   * 学生和老师的导航栏连接点击事件
+   */
+  jumpPageToIframe('a_teacher', '/stuinfo/show/adminteacher.html');
+  jumpPageToIframe('a_school', '/stuinfo/show/adminstudent.html');
+
+  /**
+   * 学校管理
+   */
+  jumpPageToIframe('a_student', '/stuinfo/show/adminstudent.html');
+
+
+</script>
+<script>
+</script>
+</html>

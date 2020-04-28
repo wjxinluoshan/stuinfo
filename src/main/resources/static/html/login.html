@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>登录</title>
+  <link rel="stylesheet" href="/stuinfo/layui/css/layui.css">
+  <script src="/stuinfo/layui/layui.js"></script>
+  <script src="/stuinfo/js/vue.js"></script>
+  <script src="/stuinfo/js/jquery.min.js"></script>
+
+  <style>
+    #form_id {
+      right: 10%;
+      margin-top: 200px;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+<div class="layui-form" id="form_id">
+  <div class="layui-form-item">
+    <label class="layui-form-label">输入框</label>
+    <div class="layui-input-inline">
+      <input v-model="accountName" type="text" name="title" required lay-verify="required"
+             placeholder="请输入账号"
+             autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">密码框</label>
+    <div class="layui-input-inline">
+      <input v-model="password" type="password" name="password" required lay-verify="required"
+             placeholder="请输入密码"
+             autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">单选框</label>
+    <div class="layui-input-block">
+      <input type="radio" name="mark" value="0" title="学生"
+             checked>
+      <input type="radio" name="mark" value="1" title="教师">
+      <input type="radio" name="mark"
+             value="2" title="管理员">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" @click="submit">立即提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+  layui.use('form', function () {
+    var form = layui.form;
+  });
+</script>
+<script>
+  var form_id_vue = new Vue({
+    el: "#form_id",
+    data: {
+      accountName: '',
+      password: '',
+    },
+    methods: {
+      submit: function () {
+        let mark = $("input[name='mark']:checked").val();
+        //检查账号和密码,是否有效
+        if (this.accountName.trim() && this.password.trim()) {
+          verifyLoginInfoAjax({
+            userNumber: this.accountName,
+            password: this.password,
+            mark: mark
+          });
+          //验证用户信息
+          return;
+        }
+        //账号、密码输入不合法
+        alertInfo("提醒", "账号和密码不能为空");
+      },
+    }
+  });
+
+  var verifyLoginInfoAjax = function (data) {
+    $.post("/stuinfo/login/lsort", data, function (response) {
+      //验证成功
+      if (response) {
+        console.log("success")
+        return;
+        //跳转页面
+      }
+      alertInfo("提示", "用户信息验证失败!!!");
+    })
+  };
+
+  var alertInfo = function (title, content) {
+    layer.open({
+      title: title
+      , content: content
+    });
+  }
+</script>
+</html>

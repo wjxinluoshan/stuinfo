@@ -1,30 +1,46 @@
 package com.yzt.manager.stuinfo;
 
+
 import com.yzt.manager.stuinfo.mapperimpl.SchoolInfoMapperImple;
-import com.yzt.manager.stuinfo.mapperimpl.StuAndTeacInfoMapperImple;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
-@RunWith(SpringRunner.class)
+//@RunWith(SpringRunner.class)
 @SpringBootTest
-class StuinfoApplicationTests {
+public class StuinfoApplicationTests {
 
   @Autowired
-  private StuAndTeacInfoMapperImple stuAndTeacInfoMapperImple;
+  private WebApplicationContext context;
 
   @Autowired
   private SchoolInfoMapperImple schoolInfoMapperImple;
 
-  @Test
-  void contextLoads() {
-    System.out.println(stuAndTeacInfoMapperImple.selectStu().get(0));
+  private MockMvc mvc;
+
+  @BeforeEach
+  public void setUp() {
+    // 构造MockMvc
+    mvc = MockMvcBuilders.webAppContextSetup(context).build();
+
   }
 
   @Test
-  void test2() throws Exception {
-    schoolInfoMapperImple.insertCollegeAndDepart(null, null, null);
+  public void test1() throws Exception {
+    mvc.perform(
+        MockMvcRequestBuilders.get("/test/t")
+            .param("stuNumber", "1223345"));
+  }
+
+  @Test
+  public void queryCollege(){
+    System.out.println(schoolInfoMapperImple.selectCollege(null, null));
   }
 }

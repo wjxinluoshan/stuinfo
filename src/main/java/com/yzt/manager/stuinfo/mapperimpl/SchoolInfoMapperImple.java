@@ -1,6 +1,8 @@
 package com.yzt.manager.stuinfo.mapperimpl;
 
 import com.yzt.manager.stuinfo.mapper.SchoolInfoMapper;
+import com.yzt.manager.stuinfo.pojo.CollegeInfo;
+import com.yzt.manager.stuinfo.pojo.DepartInfo;
 import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +24,13 @@ public class SchoolInfoMapperImple implements SchoolInfoMapper {
       List<List<List<String>>> lists) throws Exception {
     if (lists == null) {
       int collegeId;
-      List<Object> list = this.selectCollege(null, college);
+      List<CollegeInfo> list = this.selectCollege(null, college);
       //学院不存在，插入，得到学院id
       if (list.isEmpty()) {
         this.insertCollege(college);
-        collegeId = (Integer) this.selectCollege(null, college).get(0);
+        collegeId = this.selectCollege(null, college).get(0).getId();
       } else {
-        collegeId = (Integer) list.get(0);
+        collegeId = list.get(0).getId();
       }
       //根据学院id和系，插入数据
       for (String depart : departs) {
@@ -52,7 +54,7 @@ public class SchoolInfoMapperImple implements SchoolInfoMapper {
               if (this.selectCollege(null, string).isEmpty()) {
                 //不存在，插入数据
                 this.insertCollege(string);
-                collegeId = (Integer) this.selectCollege(null, string).get(0);
+                collegeId =  this.selectCollege(null, string).get(0).getId();
               }
               continue;
             }
@@ -75,8 +77,21 @@ public class SchoolInfoMapperImple implements SchoolInfoMapper {
 
 
   @Override
-  public List<Object> selectCollege(Integer id, String college) {
+  public List<CollegeInfo> selectCollege(Integer id, String college) {
     return schoolInfoMapper.selectCollege(id, college);
+  }
+
+  @Override
+  public Integer updateCollege(String college, String newCollege) {
+    if (newCollege == null || college == null) {
+      return null;
+    }
+    return schoolInfoMapper.updateCollege(college, newCollege);
+  }
+
+  @Override
+  public Integer delCollege(String college) {
+    return delCollege(college);
   }
 
   @Override
@@ -85,7 +100,20 @@ public class SchoolInfoMapperImple implements SchoolInfoMapper {
   }
 
   @Override
-  public List<Object> selectDepart(Integer collegeId, String depart) {
+  public List<DepartInfo> selectDepart(Integer collegeId, String depart) {
     return schoolInfoMapper.selectDepart(collegeId, depart);
+  }
+
+  @Override
+  public Integer updateDepart(String depart, String newDepart, Integer newCollegeId) {
+    if ((newDepart == null && newCollegeId == null) || depart == null) {
+      return null;
+    }
+    return schoolInfoMapper.updateDepart(depart, newDepart, newCollegeId);
+  }
+
+  @Override
+  public Integer deleteDepart(String depart) {
+    return schoolInfoMapper.deleteDepart(depart);
   }
 }
