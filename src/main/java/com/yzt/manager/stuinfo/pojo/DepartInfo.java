@@ -1,7 +1,11 @@
 package com.yzt.manager.stuinfo.pojo;
 
 public class DepartInfo {
- private Integer collegeId=null;
+
+  private Integer id = null;
+
+
+  private Integer collegeId = null;
 
   @Override
   public String toString() {
@@ -11,7 +15,15 @@ public class DepartInfo {
         '}';
   }
 
-  private String depart =null;
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  private String depart = null;
 
   public Integer getCollegeId() {
     return collegeId;

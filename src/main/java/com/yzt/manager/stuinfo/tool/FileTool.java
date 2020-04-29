@@ -83,7 +83,12 @@ public class FileTool {
   private void readSingleUniqueCellInStudentOrTeacherExcel(Sheet sheet, List<List<String>> lists) {
     //该类将cell value转换成string
     DataFormatter dataFormatter = new DataFormatter();
+    boolean firstRow = true;
     for (Row cells : sheet) {
+      if (firstRow) {
+        firstRow = false;
+        continue;
+      }
       List<String> list = new ArrayList<>();
       for (Cell cell : cells) {
         String cellValue = dataFormatter.formatCellValue(cell).trim();

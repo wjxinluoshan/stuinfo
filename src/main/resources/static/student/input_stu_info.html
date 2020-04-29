@@ -8,7 +8,7 @@
   <script src="/stuinfo/js/vue.js"></script>
   <script src="/stuinfo/js/jquery.min.js"></script>
 </head>
-<body>
+<body >
 <table class="layui-table" lay-even lay-skin="nob" width="100%" id="table_input_info_id">
   <tr>
     <!--    手动输入信息  -->
@@ -86,8 +86,8 @@
         </div>
         <div class="layui-form-item">
           <div class="layui-input-block">
-            <button class="layui-btn" lay-filter="formDemo" @click="submit">立即提交</button>
-            <button type="reset" @click="reset" class="layui-btn layui-btn-primary">重置</button>
+            <button class="layui-btn" @click="uploadInfo">立即提交</button>
+            <button @click="reset" class="layui-btn layui-btn-primary">重置</button>
           </div>
         </div>
       </div>
@@ -95,6 +95,8 @@
     <td></td>
   </tr>
 </table>
+<input type="file" accept=".xls,.xlsx" id="input_file_id"/>
+<button class="layui-btn layui-btn-radius layui-btn-primary" id="btn_upload_id">上传文件</button>
 </body>
 <script>
   //注意：导航 依赖 element 模块，否则无法进行功能性操作
@@ -111,7 +113,7 @@
     layui.form.on('select(collegeChange)', function () {
       let collegeIndex = $('#college_select_id').val();
       if (collegeIndex) {
-          queryDepart(collegeIds[collegeIndex])
+        queryDepart(collegeIds[collegeIndex])
       } else {
         table_input_info_id_vue.departs = [];
         renderFrom();
@@ -120,10 +122,11 @@
   });
 </script>
 <script src="/stuinfo/js/requestSchoolInfo.js"></script>
+<script src="/stuinfo/js/json2.js"></script>
 <script>
 
   var collegeIds = [];
-  var departDependCollegeIds = [];
+  var departIds = [];
   /**
    * 手动输入数据vue
    */
@@ -140,7 +143,42 @@
       departs: [],
     },
     methods: {
-      submit() {
+      uploadInfo() {
+        if (!this.stuNumber.trim()) {
+          myAlert('学号不能为空!!!');
+          return;
+        }
+        if (!this.stuClass.trim()) {
+          myAlert('学生班级不能为空!!!');
+          return;
+        }
+        if (!this.name.trim()) {
+          myAlert('学生姓名不能为空!!!');
+          return;
+        }
+        if (!this.inSchoolYear.trim()) {
+          myAlert('学生入学年线不能为空!!!');
+          return;
+        }
+
+        if (!$('#college_select_id').val() || !$('#depart_select_id').val()) {
+          myAlert('学生所在院系不能不选!!!');
+          return;
+        }
+        let formData = new FormData();
+
+        formData.append('isTeacher', "1");
+        formData.append('stus', JSON.stringify({
+          stuNumber: this.stuNumber.trim(),
+          stuClass: this.stuClass,
+          name: this.name.trim(),
+          college: collegeIds[$('#college_select_id').val()],
+          depart: departIds[$('#depart_select_id').val()],
+          phone: this.phone.trim(),
+          inSchoolYear: this.inSchoolYear.trim()
+        }));
+
+        uploadInfo(formData, true)
 
       },
       reset() {
@@ -185,20 +223,20 @@
     requestSchoolInfo('/stuinfo/sic/qds', {collegeId: id}).then(departs => {
       if (departs) {
         let tempDeparts = [];
-        let tempdependCollegeIds = [];
+        let tempdependIds = [];
         departs.forEach((depart) => {
           try {
             /**
              *返回的数据形式为[{},{},{}]
              */
             tempDeparts.push(depart.depart);
-            tempdependCollegeIds.push(depart.collegeId);
+            tempdependIds.push(depart.id);
           } catch (e) {
           }
         });
         if (tempDeparts.length > 0) {
           table_input_info_id_vue.departs = tempDeparts;
-          departDependCollegeIds = tempdependCollegeIds;
+          departIds = tempdependIds;
         }
         renderFrom();
         return;
@@ -206,6 +244,52 @@
       myAlert('获取系信息失败!!!');
 
     });
+  }
+
+  var fileOfUpload = '';
+  /**
+   * 监听文件选择事件
+   */
+  document.getElementById('input_file_id').onchange = function () {
+    fileOfUpload = this.files[0];
+  };
+
+  /**
+   * 文件上传
+   */
+  $('#btn_upload_id').on('click', () => {
+    if (fileOfUpload) {
+      let formData = new FormData();
+      formData.append('file', fileOfUpload);
+      formData.append('isTeacher', "1");
+      uploadInfo(formData);
+    } else {
+      myAlert("请选择一个.xls或者.xlsx文件!!!")
+    }
+  });
+
+  function uploadInfo(formData, isInput) {
+    $.ajax({
+      type: "POST",
+      url: '/stuinfo/sctc/isot',
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        if (response) {
+          if (isInput) {
+            table_input_info_id_vue.reset();
+          }
+          myAlert('上传成功!!!');
+        } else {
+          myAlert('上传失败!!!');
+        }
+      },
+      error: function (e) {
+        myAlert('上传失败!!!');
+      }
+    });
+
   }
 
   function myAlert(content) {

@@ -59,20 +59,12 @@ public class StuInfo {
     this.name = name;
   }
 
-  public int getCollege() {
+  public Integer getCollege() {
     return college;
   }
 
-  public void setCollege(int college) {
-    this.college = college;
-  }
-
-  public int getDepart() {
+  public Integer getDepart() {
     return depart;
-  }
-
-  public void setDepart(int depart) {
-    this.depart = depart;
   }
 
   public String getPhone() {

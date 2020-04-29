@@ -23,6 +23,7 @@ public class StuinfoApplicationTests {
   @Autowired
   private SchoolInfoMapperImple schoolInfoMapperImple;
 
+
   private MockMvc mvc;
 
   @BeforeEach
@@ -42,5 +43,11 @@ public class StuinfoApplicationTests {
   @Test
   public void queryCollege(){
     System.out.println(schoolInfoMapperImple.selectCollege(null, null));
+  }
+
+  @Test
+  public void queryStudent() throws Exception {
+  mvc.perform(
+        MockMvcRequestBuilders.get("/test/qs"));
   }
 }

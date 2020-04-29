@@ -29,6 +29,7 @@ public interface StuAndTeacInfoMapper {
       "<if test='college !=null'>,college</if>",
       "<if test='depart !=null'>,depart</if>",
       "<if test='phone !=null'>,phone</if>",
+      "<if test='inSchoolYear !=null'>,inSchoolYear</if>",
       "</trim>",
       ") values(",
       "<trim prefix='' prefixOverrides=','>",
@@ -39,6 +40,7 @@ public interface StuAndTeacInfoMapper {
       "<if test='college !=null'>,#{college}</if>",
       "<if test='depart !=null'>,#{depart}</if>",
       "<if test='phone !=null'>,#{phone}</if>",
+      "<if test='inSchoolYear !=null'>,#{inSchoolYear}</if>",
       "</trim>",
       ")",
       "</script>"

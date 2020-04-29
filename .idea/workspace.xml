@@ -2,27 +2,42 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14dbec59-18af-4c74-a09f-c404794f176b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/school/input_school_info.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/school/school_manager.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/json2.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/student/student_info_manager.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/controller/SchoolInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/controller/SchoolInfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/controller/StuAndTeacController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/controller/StuAndTeacController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/controller/TestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/controller/TestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/mapper/SchoolInfoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/mapper/SchoolInfoMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/mapperimpl/SchoolInfoMapperImple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/mapperimpl/SchoolInfoMapperImple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/html/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/html/admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/requestSchoolInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/requestSchoolInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/manager/input_s_archive.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/student/input_s_archive.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/manager/input_stu_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/student/input_stu_info.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/show/adminschool.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/show/adminschool.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/mapper/StuAndTeacInfoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/mapper/StuAndTeacInfoMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/mapperimpl/StuAndTeacInfoMapperImple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/mapperimpl/StuAndTeacInfoMapperImple.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/pojo/DepartInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/pojo/DepartInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/pojo/StuInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/pojo/StuInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/pojo/StuInfoCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/pojo/StuInfoCondition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/pojo/TeacherInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/pojo/TeacherInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/pojo/TeacherInfoCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/pojo/TeacherInfoCondition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/tool/FileTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/tool/FileTool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/school/input_school_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/school/input_school_info.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/show/adminstudent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/show/adminstudent.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/controller/SchoolInfoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/controller/SchoolInfoController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/student/input_stu_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/student/input_stu_info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/yzt/manager/stuinfo/StuinfoApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/yzt/manager/stuinfo/StuinfoApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stuinfo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/stuinfo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/stuinfo.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/controller/StuAndTeacController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/controller/StuAndTeacController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/controller/TestController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/controller/TestController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/mapper/SchoolInfoMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/mapper/SchoolInfoMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/mapperimpl/SchoolInfoMapperImple.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/mapperimpl/SchoolInfoMapperImple.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/html/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/html/admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/js/requestSchoolInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/requestSchoolInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/manager/input_s_archive.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/manager/input_stu_info.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/show/adminschool.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/show/adminschool.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/show/adminstudent.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/show/adminstudent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/mapper/StuAndTeacInfoMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/mapper/StuAndTeacInfoMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/mapperimpl/StuAndTeacInfoMapperImple.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/mapperimpl/StuAndTeacInfoMapperImple.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/pojo/DepartInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/pojo/DepartInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/pojo/StuInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/pojo/StuInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/pojo/StuInfoCondition.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/pojo/StuInfoCondition.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/pojo/TeacherInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/pojo/TeacherInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/pojo/TeacherInfoCondition.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/pojo/TeacherInfoCondition.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/tool/FileTool.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/tool/FileTool.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/school/input_school_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/school/input_school_info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/student/input_stu_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/student/input_stu_info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/yzt/manager/stuinfo/StuinfoApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/yzt/manager/stuinfo/StuinfoApplicationTests.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,10 +87,11 @@
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="android.sdk.path" value="D:/an-studio/sdk" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static/show" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static/js" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
@@ -88,12 +104,13 @@
       <recent name="com.yzt.manager.stuinfo.config" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.yzt.manager.stuinfo.config" />
       <recent name="com.yzt.manager.stuinfo.pojo" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\compilers\in-idea\projects\android\stuinfo\src\main\resources\static\js" />
       <recent name="D:\compilers\in-idea\projects\android\stuinfo\src\main\resources\static\show" />
       <recent name="D:\compilers\in-idea\projects\android\stuinfo\src\main\resources\static\sysimg" />
-      <recent name="D:\compilers\in-idea\projects\android\stuinfo\src\main\resources\static\js" />
       <recent name="D:\compilers\in-idea\projects\android\stuinfo\src\main\resources\static" />
     </key>
   </component>
@@ -144,6 +161,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="StuinfoApplicationTests.queryStudent" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="stuinfo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.yzt.manager.stuinfo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.yzt.manager.stuinfo" />
+      <option name="MAIN_CLASS_NAME" value="com.yzt.manager.stuinfo.StuinfoApplicationTests" />
+      <option name="METHOD_NAME" value="queryStudent" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="StuinfoApplicationTests.test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="stuinfo" />
       <extension name="coverage">
@@ -155,22 +188,6 @@
       <option name="PACKAGE_NAME" value="com.yzt.manager.stuinfo" />
       <option name="MAIN_CLASS_NAME" value="com.yzt.manager.stuinfo.StuinfoApplicationTests" />
       <option name="METHOD_NAME" value="test1" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="StuinfoApplicationTests.test2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="stuinfo" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.yzt.manager.stuinfo.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.yzt.manager.stuinfo" />
-      <option name="MAIN_CLASS_NAME" value="com.yzt.manager.stuinfo.StuinfoApplicationTests" />
-      <option name="METHOD_NAME" value="test2" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -201,11 +218,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.StuinfoApplicationTests.queryStudent" />
         <item itemvalue="JUnit.StuinfoApplicationTests.queryCollege" />
         <item itemvalue="JUnit.StuinfoApplicationTests.test1" />
         <item itemvalue="JUnit.StuinfoApplicationTests.testHello" />
         <item itemvalue="JUnit.StuinfoApplicationTests.contextLoads" />
-        <item itemvalue="JUnit.StuinfoApplicationTests.test2" />
       </list>
     </recent_temporary>
   </component>
@@ -234,7 +251,7 @@
       <workItem from="1587967854754" duration="25291000" />
       <workItem from="1588035009492" duration="125000" />
       <workItem from="1588038090030" duration="34793000" />
-      <workItem from="1588123084047" duration="27681000" />
+      <workItem from="1588123084047" duration="38231000" />
     </task>
     <servers />
   </component>
@@ -246,10 +263,10 @@
       <screen x="0" y="31" width="1280" height="689" />
     </state>
     <state x="427" y="180" key="#com.intellij.fileTypes.FileTypeChooser/0.31.1280.689@0.31.1280.689" timestamp="1587969641795" />
-    <state x="446" y="61" key="#com.intellij.ide.util.MemberChooser" timestamp="1588085507138">
+    <state x="446" y="61" key="#com.intellij.ide.util.MemberChooser" timestamp="1588163396964">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state x="446" y="61" key="#com.intellij.ide.util.MemberChooser/0.31.1280.689@0.31.1280.689" timestamp="1588085507138" />
+    <state x="446" y="61" key="#com.intellij.ide.util.MemberChooser/0.31.1280.689@0.31.1280.689" timestamp="1588163396964" />
     <state x="319" y="303" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1587968678036">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
@@ -262,54 +279,54 @@
       <screen x="0" y="31" width="1280" height="689" />
     </state>
     <state x="421" y="132" key="FileChooserDialogImpl/0.31.1280.689@0.31.1280.689" timestamp="1587975492661" />
-    <state width="1237" height="258" key="GridCell.Tab.0.bottom" timestamp="1588158533497">
+    <state width="1237" height="239" key="GridCell.Tab.0.bottom" timestamp="1588169717389">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="258" key="GridCell.Tab.0.bottom/0.31.1280.689@0.31.1280.689" timestamp="1588158533497" />
-    <state width="1237" height="258" key="GridCell.Tab.0.center" timestamp="1588158533497">
+    <state width="1237" height="239" key="GridCell.Tab.0.bottom/0.31.1280.689@0.31.1280.689" timestamp="1588169717389" />
+    <state width="1237" height="239" key="GridCell.Tab.0.center" timestamp="1588169717389">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="258" key="GridCell.Tab.0.center/0.31.1280.689@0.31.1280.689" timestamp="1588158533497" />
-    <state width="1237" height="258" key="GridCell.Tab.0.left" timestamp="1588158533497">
+    <state width="1237" height="239" key="GridCell.Tab.0.center/0.31.1280.689@0.31.1280.689" timestamp="1588169717389" />
+    <state width="1237" height="239" key="GridCell.Tab.0.left" timestamp="1588169717389">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="258" key="GridCell.Tab.0.left/0.31.1280.689@0.31.1280.689" timestamp="1588158533497" />
-    <state width="1237" height="258" key="GridCell.Tab.0.right" timestamp="1588158533497">
+    <state width="1237" height="239" key="GridCell.Tab.0.left/0.31.1280.689@0.31.1280.689" timestamp="1588169717389" />
+    <state width="1237" height="239" key="GridCell.Tab.0.right" timestamp="1588169717389">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="258" key="GridCell.Tab.0.right/0.31.1280.689@0.31.1280.689" timestamp="1588158533497" />
-    <state width="1237" height="258" key="GridCell.Tab.1.bottom" timestamp="1588158533498">
+    <state width="1237" height="239" key="GridCell.Tab.0.right/0.31.1280.689@0.31.1280.689" timestamp="1588169717389" />
+    <state width="1237" height="291" key="GridCell.Tab.1.bottom" timestamp="1588169717389">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="258" key="GridCell.Tab.1.bottom/0.31.1280.689@0.31.1280.689" timestamp="1588158533498" />
-    <state width="1237" height="258" key="GridCell.Tab.1.center" timestamp="1588158533498">
+    <state width="1237" height="291" key="GridCell.Tab.1.bottom/0.31.1280.689@0.31.1280.689" timestamp="1588169717389" />
+    <state width="1237" height="291" key="GridCell.Tab.1.center" timestamp="1588169717389">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="258" key="GridCell.Tab.1.center/0.31.1280.689@0.31.1280.689" timestamp="1588158533498" />
-    <state width="1237" height="258" key="GridCell.Tab.1.left" timestamp="1588158533498">
+    <state width="1237" height="291" key="GridCell.Tab.1.center/0.31.1280.689@0.31.1280.689" timestamp="1588169717389" />
+    <state width="1237" height="291" key="GridCell.Tab.1.left" timestamp="1588169717389">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="258" key="GridCell.Tab.1.left/0.31.1280.689@0.31.1280.689" timestamp="1588158533498" />
-    <state width="1237" height="258" key="GridCell.Tab.1.right" timestamp="1588158533498">
+    <state width="1237" height="291" key="GridCell.Tab.1.left/0.31.1280.689@0.31.1280.689" timestamp="1588169717389" />
+    <state width="1237" height="291" key="GridCell.Tab.1.right" timestamp="1588169717389">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="258" key="GridCell.Tab.1.right/0.31.1280.689@0.31.1280.689" timestamp="1588158533498" />
-    <state width="1237" height="291" key="GridCell.Tab.2.bottom" timestamp="1588139280893">
+    <state width="1237" height="291" key="GridCell.Tab.1.right/0.31.1280.689@0.31.1280.689" timestamp="1588169717389" />
+    <state width="1237" height="291" key="GridCell.Tab.2.bottom" timestamp="1588169717389">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="291" key="GridCell.Tab.2.bottom/0.31.1280.689@0.31.1280.689" timestamp="1588139280893" />
-    <state width="1237" height="291" key="GridCell.Tab.2.center" timestamp="1588139280893">
+    <state width="1237" height="291" key="GridCell.Tab.2.bottom/0.31.1280.689@0.31.1280.689" timestamp="1588169717389" />
+    <state width="1237" height="291" key="GridCell.Tab.2.center" timestamp="1588169717389">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="291" key="GridCell.Tab.2.center/0.31.1280.689@0.31.1280.689" timestamp="1588139280893" />
-    <state width="1237" height="291" key="GridCell.Tab.2.left" timestamp="1588139280893">
+    <state width="1237" height="291" key="GridCell.Tab.2.center/0.31.1280.689@0.31.1280.689" timestamp="1588169717389" />
+    <state width="1237" height="291" key="GridCell.Tab.2.left" timestamp="1588169717389">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="291" key="GridCell.Tab.2.left/0.31.1280.689@0.31.1280.689" timestamp="1588139280893" />
-    <state width="1237" height="291" key="GridCell.Tab.2.right" timestamp="1588139280893">
+    <state width="1237" height="291" key="GridCell.Tab.2.left/0.31.1280.689@0.31.1280.689" timestamp="1588169717389" />
+    <state width="1237" height="291" key="GridCell.Tab.2.right" timestamp="1588169717389">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="291" key="GridCell.Tab.2.right/0.31.1280.689@0.31.1280.689" timestamp="1588139280893" />
+    <state width="1237" height="291" key="GridCell.Tab.2.right/0.31.1280.689@0.31.1280.689" timestamp="1588169717389" />
     <state x="342" y="201" key="com.intellij.ide.util.TipDialog" timestamp="1588123152183">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
@@ -330,6 +347,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/mapperimpl/SchoolInfoMapperImple.java</url>
           <line>44</line>
           <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/tool/FileTool.java</url>
+          <line>93</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

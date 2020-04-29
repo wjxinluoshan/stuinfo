@@ -49,7 +49,7 @@ public class StuAndTeacController {
   public String inputStudentOrTeacher(
       @RequestParam(value = "stus", required = false) StuInfo[] stuInfos,
       @RequestParam(value = "teachers", required = false) TeacherInfo[] teacherInfos,
-      @RequestParam(value = "file", required = false) MultipartFile multipartFile, String isTeacher)
+      @RequestParam(value = "file", required = false) MultipartFile multipartFile, Integer isTeacher)
       throws Exception {
     if (multipartFile == null) {
       stuAndTeacInfoMapperImple.insertStuAndTeacherInfo(stuInfos, teacherInfos, null, isTeacher);

@@ -34,19 +34,19 @@ public class TeacherInfo {
     this.name = name;
   }
 
-  public int getCollege() {
+  public Integer getCollege() {
     return college;
   }
 
-  public void setCollege(int college) {
+  public void setCollege(Integer college) {
     this.college = college;
   }
 
-  public int getDepart() {
+  public Integer getDepart() {
     return depart;
   }
 
-  public void setDepart(int depart) {
+  public void setDepart(Integer depart) {
     this.depart = depart;
   }
 

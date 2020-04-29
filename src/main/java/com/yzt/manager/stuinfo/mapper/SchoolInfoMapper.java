@@ -38,7 +38,7 @@ public interface SchoolInfoMapper {
   /**
    * 系
    */
-  @Insert("insert into tb_department values(#{collegeId},#{depart})")
+  @Insert("insert into tb_department(collegeId,depart) values(#{collegeId},#{depart})")
   Integer insertDepart(Integer collegeId, String depart);
 
   @Select({

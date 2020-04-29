@@ -60,7 +60,7 @@ public class StuAndTeacInfoMapperImple implements StuAndTeacInfoMapper {
    */
   public void insertStuAndTeacherInfo(StuInfo[] stuInfos,
       TeacherInfo[] teacherInfos,
-      List<List<List<String>>> listList, String isTeacher) {
+      List<List<List<String>>> listList, Integer isTeacher) {
     //文件形式的插入
     if (listList != null) {
       //遍历各个excel的sheet
@@ -68,14 +68,14 @@ public class StuAndTeacInfoMapperImple implements StuAndTeacInfoMapper {
         //遍历sheet的各个行
         for (List<String> list : lists) {
           //插入老师
-          if (Integer.parseInt(isTeacher) == 0) {
+          if (isTeacher == 0) {
             TeacherInfo teacherInfo = new TeacherInfo();
             teacherInfo.setTeacherNumber(list.get(0));
             teacherInfo.setName(list.get(1));
-            teacherInfo.setPassword(list.get(2));
-            teacherInfo.setCollege(Integer.parseInt(list.get(3)));
-            teacherInfo.setDepart(Integer.parseInt(list.get(4)));
-            teacherInfo.setPhone(list.get(5));
+//            teacherInfo.setPassword(list.get(2));
+            teacherInfo.setCollege(Integer.parseInt(list.get(2)));
+            teacherInfo.setDepart(Integer.parseInt(list.get(3)));
+            teacherInfo.setPhone(list.get(4));
             //该老师信息尚未输入
             TeacherInfoCondition teacherInfoCondition = new TeacherInfoCondition();
             teacherInfoCondition.setTeacherNumber(teacherInfo.getTeacherNumber());
@@ -89,11 +89,13 @@ public class StuAndTeacInfoMapperImple implements StuAndTeacInfoMapper {
             stuInfo.setStuNumber(list.get(0));
             stuInfo.setStuClass(list.get(1));
             stuInfo.setName(list.get(2));
-            stuInfo.setPassword(list.get(3));
-            stuInfo.setCollege(Integer.parseInt(list.get(4)));
-            stuInfo.setDepart(Integer.parseInt(list.get(5)));
-            stuInfo.setPhone(list.get(6));
-            stuInfo.setInSchoolYear(list.get(7));
+//            if (!list.get(3).equals("123456")) {
+//              stuInfo.setPassword(list.get(3));
+//            }
+            stuInfo.setCollege(Integer.parseInt(list.get(3)));
+            stuInfo.setDepart(Integer.parseInt(list.get(4)));
+            stuInfo.setPhone(list.get(5));
+            stuInfo.setInSchoolYear(list.get(6));
             //该学生信息尚未输入
             StuInfoCondition stuInfoCondition = new StuInfoCondition();
             stuInfoCondition.setStuNumber(stuInfo.getStuNumber());
