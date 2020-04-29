@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>学校信息录入</title>
+  <link rel="stylesheet" href="/stuinfo/layui/css/layui.css">
+  <script src="/stuinfo/layui/layui.js"></script>
+  <script src="/stuinfo/js/vue.js"></script>
+  <script src="/stuinfo/js/jquery.min.js"></script>
+  <style>
+    td {
+      text-align: center;
+    }
+
+  </style>
+</head>
+<body>
+<table width="100%" class="layui-table" lay-skin="row" id="table_input_id">
+  <thead>
+  <tr>
+    <th style="text-align: center">学院/系</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>
+      <input v-model="college" style="text-align: center;" type="text" placeholder="所属学院"
+             autocomplete="off" class="layui-input">
+      <input v-model="depart" style="text-align: center;margin-top: 10px" type="text"
+             placeholder="请输入系"
+             autocomplete="off" class="layui-input">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <button class="layui-btn layui-btn-radius" @click="upload">确认上传</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<input type="file" accept=".xls,.xlsx" id="input_file_id"/>
+<button class="layui-btn layui-btn-radius layui-btn-primary" id="btn_upload_id">上传文件</button>
+</body>
+
+<script>
+
+  var table_input_id_vue = new Vue({
+    el: '#table_input_id',
+    data: {
+      college: '',
+      depart: ''
+    },
+    methods: {
+      /**
+       * 上传学院、系信息
+       * @param type
+       */
+      upload() {
+        /**
+         * 检查学院是否输入
+         */
+        let tempCollege = this.college.trim();
+        //输入学院有效成功
+        if (tempCollege) {
+          let data = new FormData();
+          data.append('college', tempCollege);
+          let tempDepart = this.depart.trim();
+          //如果学院输入有效
+          if (tempDepart) {
+            data.append('departs', tempDepart);
+          }
+          //上传数据
+          uploadInfo(data);
+        } else {
+          myAlert('请输入学院!!!');
+        }
+      }
+    }
+  });
+
+  var fileOfUpload = '';
+  /**
+   * 监听文件选择事件
+   */
+  document.getElementById('input_file_id').onchange = function () {
+    fileOfUpload = this.files[0];
+  };
+
+  /**
+   * 文件上传
+   */
+  $('#btn_upload_id').on('click', () => {
+    if (fileOfUpload) {
+      let formData = new FormData();
+      formData.append('file', fileOfUpload);
+      uploadInfo(formData);
+    } else {
+      myAlert("请选择一个.xls或者.xlsx文件!!!")
+    }
+  });
+
+  var myAlert;
+  layui.use('layer', function () {
+    myAlert = function myAlert(content) {
+      layer.open({
+        title: '提示'
+        , content: content
+      });
+    }
+  });
+
+  function uploadInfo(formData) {
+    $.ajax({
+      type: "POST",
+      url: '/stuinfo/sic/icandd',
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        if (response) {
+          myAlert('上传成功!!!');
+        } else {
+          myAlert('上传失败!!!');
+        }
+      },
+      error: function (e) {
+        myAlert('上传失败!!!');
+      }
+    })
+  }
+
+</script>
+</html>

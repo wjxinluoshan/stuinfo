@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>学校信息管理</title>
+  <link rel="stylesheet" href="/stuinfo/layui/css/layui.css">
+  <script src="/stuinfo/layui/layui.js"></script>
+  <script src="/stuinfo/js/vue.js"></script>
+  <script src="/stuinfo/js/jquery.min.js"></script>
+  <style>
+    td {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<button style="margin-top: 3px" type="button" id="btn_edit_college_id"
+        class="layui-btn layui-btn-radius layui-btn-primary">
+  修改学院</a>
+</button>
+
+<!--
+
+修改学院
+
+-->
+<table class="layui-table" lay-skin="line" id="table_input_college_id">
+  <tr v-for="(college,index) in colleges">
+    <td>
+      <div class="layui-input-inline">
+        <input type="text" :value="college" :id="'input_college'+index" required
+               lay-verify="required"
+               autocomplete="off"
+               class="layui-input">
+      </div>
+    </td>
+    <td>
+      <button class="layui-btn layui-btn-radius" @click="editCollege(index)">修改</button>
+    </td>
+    <td>
+      <button class="layui-btn layui-btn-danger layui-btn-radius"
+              @click="delCollege(index)">删除
+      </button>
+    </td>
+  </tr>
+</table>
+
+<!--
+
+修改系
+
+-->
+<button type="button" id="btn_edit_depart_id" class="layui-btn layui-btn-radius">修改系</button>
+
+<table class="layui-table" lay-skin="line" id="table_input_info_id" style="opacity: 0">
+  <tr>
+    <td>
+      <div class="layui-form">
+        <div class="layui-form-item">
+          <div class="layui-input-inline">
+            <select lay-filter="collegeChange" name="college" id="college_select_id">
+              <option value="">请选择一个学院</option>
+              <option v-for="(college,index) in colleges"
+                      :value="index">{{college}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr v-for="(depart,index) in departs" style="width: 100%">
+    <td>
+      <div class="layui-input-inline">
+        <input type="text" :value="depart" :id="'input'+index" required lay-verify="required"
+               autocomplete="off"
+               class="layui-input">
+      </div>
+      <button class="layui-btn layui-btn-radius" @click="editDepart(index)">修改</button>
+    </td>
+    <td>
+      <div class="layui-form layui-input-inline">
+        <div class="layui-form-item">
+          <div class="layui-input-inline">
+            <select name="college" :id="'change_college_of_depart_id'+index">
+              <option value="">请选择一个学院</option>
+              <option v-for="(college,index) in colleges"
+                      :value="index">{{college}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button class="layui-btn layui-btn-primary layui-btn-radius"
+              @click="changeDepartToC(index)">转至该学院
+      </button>
+    </td>
+    <td>
+      <button class="layui-btn layui-btn-danger layui-btn-radius
+"
+              @click="delDepart(index)">删除
+      </button>
+    </td>
+  </tr>
+</table>
+</div>
+</table>
+</body>
+<script>
+  //注意：导航 依赖 element 模块，否则无法进行功能性操作
+  layui.use('element', function () {
+    var element = layui.element;
+
+    //…
+  });
+
+  layui.use('form', function () {
+    /**
+     * 学院选择事件
+     */
+    layui.form.on('select(collegeChange)', function () {
+      let collegeIndex = $('#college_select_id').val();
+      if (collegeIndex) {
+        queryDepart(collegeIds[collegeIndex])
+      } else {
+        table_input_info_id_vue.departs = [];
+        renderFrom();
+      }
+    });
+  });
+
+  /**
+   * 操作学院和系得切换按钮
+   *点击事件
+   */
+  //学院
+  $('#btn_edit_college_id').on('click', () => {
+    $('#table_input_college_id').css('opacity', 1);
+    $('#table_input_info_id').css('opacity', 0);
+  });
+  //系
+  $('#btn_edit_depart_id').on('click', () => {
+    $('#table_input_college_id').css('opacity', 0);
+    $('#table_input_info_id').css('opacity', 1);
+    queryColleges();
+  });
+
+</script>
+<script src="/stuinfo/js/requestSchoolInfo.js"></script>
+<script>
+
+  var outerColleges = [];
+  var collegeIds = [];
+
+  var outerDeparts = [];
+  var departDependCollegeIds = [];
+  /**
+   * 手动输入数据vue
+   */
+  var table_input_info_id_vue = new Vue({
+    el: '#table_input_info_id',
+    data: {
+      colleges: [],
+      departs: [],
+    },
+    methods: {
+      /**
+       * 删除系
+       */
+      delDepart(index) {
+        if (confirm('确定删除---' + this.delDepart[index])) {
+          $.post('/stuinfo/sic/deld', {depart: this.departs[index]}, function (response) {
+            if (response) {
+              outerDeparts.splice(index, 1);
+              departDependCollegeIds.splice(index, 1);
+              this.departs = outerDeparts;
+              renderFrom();
+              myAlert('删除本系成功!!!');
+            } else {
+              myAlert('删除本系失败!!!');
+            }
+          }).fail(function () {
+            myAlert('删除本系失败!!!');
+          });
+        }
+      },
+      /**
+       * 将系移至某一学院
+       * @param index
+       */
+      changeDepartToC(index) {
+        let collegeIndex = $('#change_college_of_depart_id' + index).val().trim();
+        if (collegeIndex) {
+          if (departDependCollegeIds[index] !== collegeIds[collegeIndex]) {
+            /**
+             *修改信息
+             */
+            $.post('/stuinfo/sic/ud', {
+              depart: outerDeparts[index],
+              newCollegeId: collegeIds[collegeIndex]
+            }, function (response) {
+              if (response) {
+                outerDeparts.splice(index, 1);
+                departDependCollegeIds.splice(index, 1);
+                this.departs = outerDeparts;
+                renderFrom();
+                myAlert('转移成功!!!');
+              } else {
+                myAlert('转移失败!!!');
+              }
+            }).fail(function (e) {
+              myAlert('修改系失败!!!');
+
+            });
+          } else {
+            myAlert('本专业就在该学院!!!');
+          }
+        } else {
+          myAlert('请选择学院对象!!!');
+        }
+      },
+      editDepart(index) {
+        let editDepart = $('#input' + index).val().trim();
+        let oldDepart = this.departs[index];
+        if (editDepart && this.departs.indexOf(editDepart) === -1) {
+          /**
+           *修改信息
+           */
+          $.post('/stuinfo/sic/ud', {
+            depart: outerDeparts[index],
+            newDepart: editDepart
+          }, function (response) {
+            if (response) {
+              outerDeparts[outerDeparts.indexOf(oldDepart)] = editDepart;
+              renderFrom();
+              myAlert('修改系成功!!!');
+            } else {
+              myAlert('修改系失败!!!');
+            }
+          }).fail(function (e) {
+            myAlert('修改系失败!!!');
+
+          });
+        } else {
+          if (!editDepart) {
+            myAlert('修改专业不合法!!!');
+          } else {
+            myAlert('该专业已存在!!!');
+          }
+        }
+      }
+    },
+  });
+
+  /**
+   * 获取学院信息
+   */
+  function queryColleges() {
+    requestSchoolInfo('/stuinfo/sic/qcs', {}).then(colleges => {
+      if (colleges) {
+        let tempColleges = [];
+        let tempCollegeIds = [];
+        colleges.forEach((college) => {
+          try {
+            tempColleges.push(college.college);
+            tempCollegeIds.push(college.id);
+          } catch (e) {
+            console.log(e)
+          }
+        });
+        if (tempColleges.length > 0) {
+          table_input_info_id_vue.colleges = tempColleges;
+          table_input_college_id_vue.colleges = tempColleges;
+          outerColleges = tempColleges;
+          collegeIds = tempCollegeIds;
+        }
+        renderFrom();
+        return;
+      }
+      myAlert('获取学院信息失败!!!');
+    });
+  }
+
+  queryColleges();
+
+  /**
+   * 获取系信息
+   */
+  function queryDepart(id) {
+    requestSchoolInfo('/stuinfo/sic/qds', {collegeId: id}).then(departs => {
+      if (departs) {
+        let tempDeparts = [];
+        let tempdependCollegeIds = [];
+        departs.forEach((depart) => {
+          try {
+            /**
+             *返回的数据形式为[{},{},{}]
+             */
+            tempDeparts.push(depart.depart);
+            tempdependCollegeIds.push(depart.collegeId);
+          } catch (e) {
+          }
+        });
+        if (tempDeparts.length > 0) {
+          table_input_info_id_vue.departs = tempDeparts;
+          outerDeparts = tempDeparts;
+          departDependCollegeIds = tempdependCollegeIds;
+        }
+        renderFrom();
+        return;
+      }
+      myAlert('获取系信息失败!!!');
+
+    });
+  }
+
+  function myAlert(content) {
+    layer.open({
+      title: '提示'
+      , content: content
+    });
+  }
+
+  //延迟重新渲染
+  function renderFrom() {
+    setTimeout(function () {
+      layui.form.render();
+    }, 100);
+  }
+
+</script>
+
+<script>
+  var table_input_college_id_vue = new Vue({
+    el: '#table_input_college_id',
+    data: {
+      colleges: []
+    },
+    methods: {
+      delCollege(index) {
+        if (confirm('确认删除---' + this.colleges[index])) {
+          $.post('/stuinfo/sic/delc', {college: this.colleges[index]}, function (response) {
+            if (response) {
+              $.post('/stuinfo/sic/deld', {collegeId: collegeIds[index]})
+              outerColleges.splice(index, 1);
+              collegeIds.splice(index, 1);
+              this.colleges = outerColleges;
+              renderFrom();
+              myAlert('删除本学院成功!!!');
+            } else {
+              myAlert('删除本学院失败!!!');
+            }
+          }).fail(function () {
+            myAlert('删除本学院失败!!!');
+          });
+        }
+      },
+      editCollege(index) {
+        let editCollege = $('#input_college' + index).val().trim();
+        if (editCollege && this.colleges.indexOf(editCollege) === -1) {
+          /**
+           *修改信息
+           */
+          $.post('/stuinfo/sic/uc', {
+            college: outerColleges[index],
+            newCollege: editCollege
+          }, function (response) {
+            if (response) {
+              myAlert('修改学院成功!!!');
+            } else {
+              myAlert('修改学院失败!!!');
+            }
+          }).fail(function (e) {
+            myAlert('修改学院失败!!!');
+
+          });
+        } else {
+          if (!editCollege) {
+            myAlert('修改学院不合法!!!');
+          } else {
+            myAlert('该学院已存在!!!');
+          }
+        }
+      }
+    }
+  });
+</script>
+
+</html>

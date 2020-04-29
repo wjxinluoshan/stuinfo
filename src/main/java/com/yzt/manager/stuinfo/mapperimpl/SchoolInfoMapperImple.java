@@ -33,9 +33,11 @@ public class SchoolInfoMapperImple implements SchoolInfoMapper {
         collegeId = list.get(0).getId();
       }
       //根据学院id和系，插入数据
-      for (String depart : departs) {
-        if (this.selectDepart(null, depart).isEmpty()) {
-          this.insertDepart(collegeId, depart);
+      if (departs != null) {
+        for (String depart : departs) {
+          if (this.selectDepart(null, depart).isEmpty()) {
+            this.insertDepart(collegeId, depart);
+          }
         }
       }
     } else {
@@ -54,7 +56,7 @@ public class SchoolInfoMapperImple implements SchoolInfoMapper {
               if (this.selectCollege(null, string).isEmpty()) {
                 //不存在，插入数据
                 this.insertCollege(string);
-                collegeId =  this.selectCollege(null, string).get(0).getId();
+                collegeId = this.selectCollege(null, string).get(0).getId();
               }
               continue;
             }
@@ -91,7 +93,7 @@ public class SchoolInfoMapperImple implements SchoolInfoMapper {
 
   @Override
   public Integer delCollege(String college) {
-    return delCollege(college);
+    return schoolInfoMapper.delCollege(college);
   }
 
   @Override
@@ -113,7 +115,7 @@ public class SchoolInfoMapperImple implements SchoolInfoMapper {
   }
 
   @Override
-  public Integer deleteDepart(String depart) {
-    return schoolInfoMapper.deleteDepart(depart);
+  public Integer deleteDepart(String depart, Integer collegeId) {
+    return schoolInfoMapper.deleteDepart(depart,collegeId);
   }
 }

@@ -46,7 +46,7 @@ public interface SchoolInfoMapper {
       "select * from tb_department",
       "<where>",
       "<if test='collegeId != null'>collegeId=#{collegeId}</if>",
-      "<if test='college != null'> or depart=#{depart}</if>",
+      "<if test='depart != null'> or depart=#{depart}</if>",
       "</where>",
       "</script>"
   })
@@ -64,6 +64,14 @@ public interface SchoolInfoMapper {
   })
   Integer updateDepart(String depart, String newDepart, Integer newCollegeId);
 
-  @Delete("delete from tb_department where depart=@{depart}")
-  Integer deleteDepart(String depart);
+  @Delete({
+      "<script>",
+      "delete from tb_department",
+      "<where>",
+      "<if test='depart!=null'>depart=#{depart}</if>",
+      "<if test='collegeId!=null'>or collegeId=#{collegeId}</if>",
+      "</where>",
+      "</script>"
+  })
+  Integer deleteDepart(String depart, Integer collegeId);
 }

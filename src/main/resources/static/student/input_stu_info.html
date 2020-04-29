@@ -50,7 +50,7 @@
         <div class="layui-form-item">
           <label class="layui-form-label">所在学院</label>
           <div class="layui-input-inline">
-            <select name="college" id="college_select_id">
+            <select lay-filter="collegeChange" name="college" id="college_select_id">
               <option value="">请选择一个学院</option>
               <option v-for="(college,index) in colleges"
                       :value="index">{{college}}
@@ -105,9 +105,18 @@
   });
 
   layui.use('form', function () {
-    var form = layui.form;
-
-    //各种基于事件的操作，下面会有进一步介绍
+    /**
+     * 学院选择事件
+     */
+    layui.form.on('select(collegeChange)', function () {
+      let collegeIndex = $('#college_select_id').val();
+      if (collegeIndex) {
+          queryDepart(collegeIds[collegeIndex])
+      } else {
+        table_input_info_id_vue.departs = [];
+        renderFrom();
+      }
+    });
   });
 </script>
 <script src="/stuinfo/js/requestSchoolInfo.js"></script>
@@ -115,7 +124,6 @@
 
   var collegeIds = [];
   var departDependCollegeIds = [];
-
   /**
    * 手动输入数据vue
    */
@@ -153,61 +161,65 @@
    */
   requestSchoolInfo('/stuinfo/sic/qcs', {}).then(colleges => {
     if (colleges) {
-      let hasCollege = true;
+      let tempColleges = [];
+      let tempCollegeIds = [];
       colleges.forEach((college) => {
         try {
-          /**
-           *返回的数据形式为[{},{},{}]
-           */
-          let c = college.college;
-          if (hasCollege) {
-            table_input_info_id_vue.colleges = [];
-            collegeIds = [];
-          }
-          table_input_info_id_vue.colleges.push(c);
-          collegeIds.push(college.id);
-          hasCollege = false
+          tempColleges.push(college.college);
+          tempCollegeIds.push(college.id);
         } catch (e) {
+          console.log(e)
         }
       });
-      /**
-       * 获取系信息
-       */
-      requestSchoolInfo('/stuinfo/sic/qds', {}).then(departs => {
-
-        if (departs) {
-          table_input_info_id_vue.departs = departs;
-          let hasDepart = true;
-          departs.forEach((depart) => {
-            try {
-              /**
-               *返回的数据形式为[{},{},{}]
-               */
-              let d = depart.depart;
-              if (hasDepart) {
-                table_input_info_id_vue.departs = [];
-              }
-              table_input_info_id_vue.departs.push(d);
-              departDependCollegeIds.push(depart.collegeId);
-              hasDepart = false
-            } catch (e) {
-            }
-          });
-          return;
-        }
-        myAlert('获取系信息失败!!!');
-
-      });
+      if (tempColleges.length > 0) {
+        table_input_info_id_vue.colleges = tempColleges;
+        collegeIds = tempCollegeIds;
+      }
+      renderFrom();
       return;
     }
     myAlert('获取学院信息失败!!!');
   });
+
+  function queryDepart(id) {
+    requestSchoolInfo('/stuinfo/sic/qds', {collegeId: id}).then(departs => {
+      if (departs) {
+        let tempDeparts = [];
+        let tempdependCollegeIds = [];
+        departs.forEach((depart) => {
+          try {
+            /**
+             *返回的数据形式为[{},{},{}]
+             */
+            tempDeparts.push(depart.depart);
+            tempdependCollegeIds.push(depart.collegeId);
+          } catch (e) {
+          }
+        });
+        if (tempDeparts.length > 0) {
+          table_input_info_id_vue.departs = tempDeparts;
+          departDependCollegeIds = tempdependCollegeIds;
+        }
+        renderFrom();
+        return;
+      }
+      myAlert('获取系信息失败!!!');
+
+    });
+  }
 
   function myAlert(content) {
     layer.open({
       title: '提示'
       , content: content
     });
+  }
+
+  //延迟重新渲染
+  function renderFrom() {
+    setTimeout(function () {
+      layui.form.render();
+    }, 100);
   }
 
 </script>

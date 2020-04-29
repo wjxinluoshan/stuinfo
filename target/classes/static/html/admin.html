@@ -14,16 +14,6 @@
   <li class="layui-nav-item"><a id="a_teacher">教师</a></li>
   <li class="layui-nav-item"><a id="a_student">学生</a></li>
   <li class="layui-nav-item"><a id="a_school">学校管理</a></li>
-  <!--  <li class="layui-nav-item"><a href="">大数据</a></li>-->
-  <!--  <li class="layui-nav-item">-->
-  <!--    <a href="javascript:;">解决方案</a>-->
-  <!--    <dl class="layui-nav-child"> &lt;!&ndash; 二级菜单 &ndash;&gt;-->
-  <!--      <dd><a href="">移动模块</a></dd>-->
-  <!--      <dd><a href="">后台模版</a></dd>-->
-  <!--      <dd><a href="">电商平台</a></dd>-->
-  <!--    </dl>-->
-  <!--  </li>-->
-  <!--  <li class="layui-nav-item"><a href="">社区</a></li>-->
 </ul>
 <iframe id="iframe_id" width="100%" src="/stuinfo/html/welcom.html?type=0"></iframe>
 <script>
@@ -51,12 +41,12 @@
    * 学生和老师的导航栏连接点击事件
    */
   jumpPageToIframe('a_teacher', '/stuinfo/show/adminteacher.html');
-  jumpPageToIframe('a_school', '/stuinfo/show/adminstudent.html');
+  jumpPageToIframe('a_student', '/stuinfo/show/adminstudent.html');
 
   /**
    * 学校管理
    */
-  jumpPageToIframe('a_student', '/stuinfo/show/adminstudent.html');
+  jumpPageToIframe('a_school', '/stuinfo/show/adminschool.html');
 
 
 </script>

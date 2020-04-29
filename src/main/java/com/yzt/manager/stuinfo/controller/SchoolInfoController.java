@@ -64,8 +64,9 @@ public class SchoolInfoController {
   //删除系
   @PostMapping("/deld")
   @ResponseBody
-  public String delDepart(String depart) {
-    schoolInfoMapperImple.deleteDepart(depart);
+  public String delDepart(@RequestParam(required = false) String depart,
+      @RequestParam(required = false) Integer collegeId) {
+    schoolInfoMapperImple.deleteDepart(depart,collegeId);
     return "1";
   }
 
