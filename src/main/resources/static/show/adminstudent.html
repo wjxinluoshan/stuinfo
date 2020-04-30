@@ -20,13 +20,14 @@
     <td style="width: 200px;vertical-align: baseline;padding: 0px;background-color: #393D49">
       <ul style="width: 100%" class="layui-nav layui-nav-tree" lay-filter="test">
         <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
-        <li class="layui-nav-item layui-nav-itemed">
-          <a href="javascript:;">数据录入</a>
-          <dl class="layui-nav-child">
-            <dd><a id="a_base_info_id">基本信息录入</a></dd>
-            <dd><a id="a_archive_id">学生档案录入</a></dd>
-          </dl>
-        </li>
+        <li class="layui-nav-item"><a id="a_base_info_id">基本信息录入</a></li>
+<!--        <li class="layui-nav-item layui-nav-itemed">-->
+<!--          <a href="javascript:;">数据录入</a>-->
+<!--          <dl class="layui-nav-child">-->
+<!--            <dd><a id="a_base_info_id">基本信息录入</a></dd>-->
+<!--            <dd><a id="a_archive_id">学生档案录入</a></dd>-->
+<!--          </dl>-->
+<!--        </li>-->
         <li class="layui-nav-item">
           <a href="javascript:;">数据查询</a>
           <dl class="layui-nav-child">
@@ -63,7 +64,7 @@
    * 数据录入链接
    */
   jumpPageToIframe("a_base_info_id", '/stuinfo/student/input_stu_info.html');
-  jumpPageToIframe("a_archive_id", '/stuinfo/student/input_s_archive.html');
+  // jumpPageToIframe("a_archive_id", '/stuinfo/student/input_s_archive.html');
   /**
    * 数据查询连接
    */

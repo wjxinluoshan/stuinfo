@@ -124,9 +124,9 @@
         <div class="layui-form-item">
           <div class="layui-input-inline">
             <select name="college" :id="'change_college_id'+index">
-              <option :value="collegeInColleges[index][0]">{{collegeInColleges[index][0]}}</option>
+              <option value="0">{{collegeInColleges[index][0]}}</option>
               <option v-for="(college,i) in collegeInColleges[index]"
-                      :value="college" v-if="i !== 0">{{college}}
+                      :value="i" v-if="i !== 0">{{college}}
               </option>
             </select>
           </div>
@@ -138,9 +138,9 @@
         <div class="layui-form-item">
           <div class="layui-input-inline">
             <select name="depart" :id="'change_depart_id'+index">
-              <option :value="departInDeparts[index][0]">{{departInDeparts[index][0]}}</option>
+              <option value="index">{{departInDeparts[index][0]}}</option>
               <option v-for="(depart,i) in departInDeparts[index]"
-                      :value="depart" v-if="i !== 0">{{depart}}
+                      :value="i" v-if="i !== 0">{{depart}}
               </option>
             </select>
           </div>
@@ -332,7 +332,7 @@
             , count: table_info_show_id_vue.stuNumbers.length //数据总数，从服务端得到
             , jump: function (obj, first) {
               //obj包含了当前分页的所有参数，比如：
-              // console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+              console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
               // console.log(obj.limit); //得到每页显示的条数
 
               //首次不执行
@@ -416,7 +416,7 @@
                 tempColleges.push(outerCollege);
               }
             }
-            // console.log(tempColleges)
+            console.log(tempColleges)
             //系下拉框第一个显示得操作
             let departIndex = tempDepartIds.indexOf(departId);
             let a = tempDeparts[0];

@@ -7,8 +7,17 @@ public class TeacherInfoCondition {
    */
 
   private String teacherNumber=null;
+  private String teacherClass=null;
   private Integer college=null;
   private Integer depart=null;
+
+  public String getTeacherClass() {
+    return teacherClass;
+  }
+
+  public void setTeacherClass(String teacherClass) {
+    this.teacherClass = teacherClass;
+  }
 
   public String getTeacherNumber() {
     return teacherNumber;

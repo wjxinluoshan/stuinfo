@@ -72,10 +72,10 @@ public class StuAndTeacInfoMapperImple implements StuAndTeacInfoMapper {
             TeacherInfo teacherInfo = new TeacherInfo();
             teacherInfo.setTeacherNumber(list.get(0));
             teacherInfo.setName(list.get(1));
-//            teacherInfo.setPassword(list.get(2));
-            teacherInfo.setCollege(Integer.parseInt(list.get(2)));
-            teacherInfo.setDepart(Integer.parseInt(list.get(3)));
-            teacherInfo.setPhone(list.get(4));
+            teacherInfo.setTeacherClass(list.get(2));
+            teacherInfo.setCollege(Integer.parseInt(list.get(3)));
+            teacherInfo.setDepart(Integer.parseInt(list.get(4)));
+            teacherInfo.setPhone(list.get(5));
             //该老师信息尚未输入
             TeacherInfoCondition teacherInfoCondition = new TeacherInfoCondition();
             teacherInfoCondition.setTeacherNumber(teacherInfo.getTeacherNumber());

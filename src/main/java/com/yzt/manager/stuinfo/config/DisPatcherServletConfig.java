@@ -2,6 +2,7 @@ package com.yzt.manager.stuinfo.config;
 
 import com.google.gson.Gson;
 import com.yzt.manager.stuinfo.pojo.StuInfo;
+import com.yzt.manager.stuinfo.pojo.TeacherInfo;
 import java.text.ParseException;
 import java.util.Locale;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +27,21 @@ public class DisPatcherServletConfig implements WebMvcConfigurer {
 
                             @Override
                             public String print(StuInfo object, Locale locale) {
+                              return new Gson().toJson(object);
+                            }
+                          }
+    );
+
+    registry.addFormatter(new Formatter<TeacherInfo>() {
+                            @Override
+                            public TeacherInfo parse(String json, Locale locale) throws ParseException {
+                              Gson gson = new Gson();
+                              TeacherInfo teacherInfo = gson.fromJson(json, TeacherInfo.class);
+                              return teacherInfo;
+                            }
+
+                            @Override
+                            public String print(TeacherInfo object, Locale locale) {
                               return new Gson().toJson(object);
                             }
                           }

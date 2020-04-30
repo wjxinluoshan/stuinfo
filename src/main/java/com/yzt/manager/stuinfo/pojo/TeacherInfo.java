@@ -3,12 +3,21 @@ package com.yzt.manager.stuinfo.pojo;
 public class TeacherInfo {
 
   private String teacherNumber = null;
+  private String teacherClass=null;
   private String name = null;
   private String password = null;
 
   private Integer college = null;
   private Integer depart = null;
   private String phone = null;
+
+  public String getTeacherClass() {
+    return teacherClass;
+  }
+
+  public void setTeacherClass(String teacherClass) {
+    this.teacherClass = teacherClass;
+  }
 
   public String getPassword() {
     return password;

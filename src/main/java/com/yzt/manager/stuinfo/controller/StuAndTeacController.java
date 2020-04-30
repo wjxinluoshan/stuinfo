@@ -41,6 +41,7 @@ public class StuAndTeacController {
    * @param stuInfos
    * @param teacherInfos
    * @param multipartFile
+   * @param isTeacher 0:教师
    * @return
    * @throws IOException
    */

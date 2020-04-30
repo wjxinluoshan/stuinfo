@@ -52,10 +52,10 @@ public interface StuAndTeacInfoMapper {
       "select * from tb_stu",
       "<where>",
       "<if test='stuNumber!=null'>stuNumber=#{stuNumber}</if>",
-      "<if test='stuClass!=null'> or stuClass=#{stuClass}</if>",
-      "<if test='college!=null'> or college=#{college}</if>",
-      "<if test='depart!=null'> or depart=#{depart}</if>",
-      "<if test='inSchoolYear!=null'> or inSchoolYear=#{inSchoolYear}</if>",
+      "<if test='stuClass!=null'> and stuClass=#{stuClass}</if>",
+      "<if test='college!=null'> and college=#{college}</if>",
+      "<if test='depart!=null'> and depart=#{depart}</if>",
+      "<if test='inSchoolYear!=null'> and inSchoolYear=#{inSchoolYear}</if>",
       "</where>",
       "</script>"
   })
@@ -125,8 +125,8 @@ public interface StuAndTeacInfoMapper {
       "select * from tb_teacher",
       "<where>",
       "<if test='teacherNumber!=null'>teacherNumber=#{teacherNumber}</if>",
-      "<if test='college!=null'> or college=#{college}</if>",
-      "<if test='depart!=null'> or depart=#{depart}</if>",
+      "<if test='college!=null'> and college=#{college}</if>",
+      "<if test='depart!=null'> and depart=#{depart}</if>",
       "</where>",
       "</script>"
   })
