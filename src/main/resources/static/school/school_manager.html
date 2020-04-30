@@ -200,6 +200,10 @@
               newCollegeId: collegeIds[collegeIndex]
             }, function (response) {
               if (response) {
+                if(response==-1){
+                  myAlert('该学院已存在!!!');
+                  return;
+                }
                 outerDeparts.splice(index, 1);
                 departDependCollegeIds.splice(index, 1);
                 this.departs = outerDeparts;
@@ -231,6 +235,10 @@
             newDepart: editDepart
           }, function (response) {
             if (response) {
+              if(response==-1){
+                  myAlert('该系已存在!!!');
+                  return;
+              }
               outerDeparts[outerDeparts.indexOf(oldDepart)] = editDepart;
               renderFrom();
               myAlert('修改系成功!!!');

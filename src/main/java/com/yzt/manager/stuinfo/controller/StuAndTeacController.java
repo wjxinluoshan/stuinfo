@@ -41,7 +41,7 @@ public class StuAndTeacController {
    * @param stuInfos
    * @param teacherInfos
    * @param multipartFile
-   * @param isTeacher 0:教师
+   * @param isTeacher     0:教师
    * @return
    * @throws IOException
    */
@@ -50,7 +50,8 @@ public class StuAndTeacController {
   public String inputStudentOrTeacher(
       @RequestParam(value = "stus", required = false) StuInfo[] stuInfos,
       @RequestParam(value = "teachers", required = false) TeacherInfo[] teacherInfos,
-      @RequestParam(value = "file", required = false) MultipartFile multipartFile, Integer isTeacher)
+      @RequestParam(value = "file", required = false) MultipartFile multipartFile,
+      Integer isTeacher)
       throws Exception {
     if (multipartFile == null) {
       stuAndTeacInfoMapperImple.insertStuAndTeacherInfo(stuInfos, teacherInfos, null, isTeacher);
@@ -84,17 +85,15 @@ public class StuAndTeacController {
   //修改学生信息
   @PostMapping("/usi")
   @ResponseBody
-  public String updateStuInfo(StuInfo stuInfo) {
-    stuAndTeacInfoMapperImple.updateStuInfo(stuInfo);
-    return "1";
+  public Integer updateStuInfo(StuInfo stuInfo,String oldStuNumber) {
+    return stuAndTeacInfoMapperImple.updateStuInfo(stuInfo,oldStuNumber);
   }
 
   //修改老师信息
   @PostMapping("/uti")
   @ResponseBody
-  public String updateTeacherInfo(TeacherInfo teacherInfo) {
-    stuAndTeacInfoMapperImple.updateTeacherInfo(teacherInfo);
-    return "1";
+  public Integer updateTeacherInfo(TeacherInfo teacherInfo,String oldTeacherNumber) {
+    return stuAndTeacInfoMapperImple.updateTeacherInfo(teacherInfo,oldTeacherNumber);
   }
 
   /**

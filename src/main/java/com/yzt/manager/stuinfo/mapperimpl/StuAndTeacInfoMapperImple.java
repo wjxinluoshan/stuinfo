@@ -36,8 +36,14 @@ public class StuAndTeacInfoMapperImple implements StuAndTeacInfoMapper {
   }
 
   @Override
-  public Integer updateStuInfo(StuInfo stuInfo) {
-    return stuAndTeacInfoMapper.updateStuInfo(stuInfo);
+  public Integer updateStuInfo(StuInfo stuInfo, String oldStuNumber) {
+    StuInfoCondition stuInfoCondition = new StuInfoCondition();
+    stuInfoCondition.setStuNumber(stuInfo.getStuNumber());
+    if (stuInfo.getStuNumber() == null || stuAndTeacInfoMapper.selectStu(stuInfoCondition)
+        .isEmpty()) {
+      return stuAndTeacInfoMapper.updateStuInfo(stuInfo, oldStuNumber);
+    }
+    return null;
   }
 
   @Override
@@ -51,8 +57,14 @@ public class StuAndTeacInfoMapperImple implements StuAndTeacInfoMapper {
   }
 
   @Override
-  public Integer updateTeacherInfo(TeacherInfo teacherInfo) {
-    return stuAndTeacInfoMapper.updateTeacherInfo(teacherInfo);
+  public Integer updateTeacherInfo(TeacherInfo teacherInfo, String oldTeacherNumber) {
+    TeacherInfoCondition teacherInfoCondition = new TeacherInfoCondition();
+    teacherInfoCondition.setTeacherNumber(teacherInfo.getTeacherNumber());
+    if (teacherInfo.getTeacherNumber() != null || stuAndTeacInfoMapper
+        .selectTeacher(teacherInfoCondition).isEmpty()) {
+      return stuAndTeacInfoMapper.updateTeacherInfo(teacherInfo, oldTeacherNumber);
+    }
+    return null;
   }
 
   /**
@@ -76,6 +88,7 @@ public class StuAndTeacInfoMapperImple implements StuAndTeacInfoMapper {
             teacherInfo.setCollege(Integer.parseInt(list.get(3)));
             teacherInfo.setDepart(Integer.parseInt(list.get(4)));
             teacherInfo.setPhone(list.get(5));
+            teacherInfo.setInSchoolYear(list.get(6));
             //该老师信息尚未输入
             TeacherInfoCondition teacherInfoCondition = new TeacherInfoCondition();
             teacherInfoCondition.setTeacherNumber(teacherInfo.getTeacherNumber());

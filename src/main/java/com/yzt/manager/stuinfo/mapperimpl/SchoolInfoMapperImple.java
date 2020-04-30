@@ -88,7 +88,10 @@ public class SchoolInfoMapperImple implements SchoolInfoMapper {
     if (newCollege == null || college == null) {
       return null;
     }
-    return schoolInfoMapper.updateCollege(college, newCollege);
+    if (schoolInfoMapper.selectCollege(null, newCollege).isEmpty()) {
+      return schoolInfoMapper.updateCollege(college, newCollege);
+    }
+    return -1;
   }
 
   @Override
@@ -111,11 +114,14 @@ public class SchoolInfoMapperImple implements SchoolInfoMapper {
     if ((newDepart == null && newCollegeId == null) || depart == null) {
       return null;
     }
-    return schoolInfoMapper.updateDepart(depart, newDepart, newCollegeId);
+    if (schoolInfoMapper.selectDepart(null, newDepart).isEmpty()) {
+      return schoolInfoMapper.updateDepart(depart, newDepart, newCollegeId);
+    }
+    return -1;
   }
 
   @Override
   public Integer deleteDepart(String depart, Integer collegeId) {
-    return schoolInfoMapper.deleteDepart(depart,collegeId);
+    return schoolInfoMapper.deleteDepart(depart, collegeId);
   }
 }

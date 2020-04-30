@@ -120,13 +120,14 @@
       </div>
     </td>
     <td>
-      <div class="layui-form layui-input-inline" style=" width: 190px">
+      <div class="layui-form layui-input-inline" style=" min-width: 190px">
         <div class="layui-form-item">
+          <label class="layui-form-label">{{colleges[index]}}</label></br>
           <div class="layui-input-inline">
-            <select name="college" :id="'change_college_id'+index">
-              <option :value="collegeInColleges[index][0]">{{collegeInColleges[index][0]}}</option>
+            <select :lay-filter="'college'+index" :id="'change_college_id'+index">
+              <option value="">请选择一个学院</option>
               <option v-for="(college,i) in collegeInColleges[index]"
-                      :value="college" v-if="i !== 0">{{college}}
+                      :value="college">{{college}}
               </option>
             </select>
           </div>
@@ -134,13 +135,14 @@
       </div>
     </td>
     <td>
-      <div class="layui-form layui-input-inline" style=" width: 190px">
+      <div class="layui-form layui-input-inline" style=" min-width: 190px">
         <div class="layui-form-item">
+          <label class="layui-form-label">{{departs[index]}}</label></br>
           <div class="layui-input-inline">
-            <select name="depart" :id="'change_depart_id'+index">
-              <option :value="departInDeparts[index][0]">{{departInDeparts[index][0]}}</option>
+            <select :lay-filter="'depart'+index" :id="'change_depart_id'+index">
+              <option value="">请选择一个系</option>
               <option v-for="(depart,i) in departInDeparts[index]"
-                      :value="depart" v-if="i !== 0">{{depart}}
+                      :value="depart" v-if="depart!=departs[index]">{{depart}}
               </option>
             </select>
           </div>
@@ -162,16 +164,17 @@
       </div>
     </td>
   </tr>
-  <tr>
-    <td>
-      <div id="page_div_id" v-if="stuNumbers.length>0"></div>
-    </td>
-  </tr>
+<!--  <tr>-->
+<!--    <td>-->
+<!--      <div id="page_div_id" v-if="stuNumbers.length>0"></div>-->
+<!--    </td>-->
+<!--  </tr>-->
   <tbody>
   </tbody>
 </table>
 </body>
 <script src="/stuinfo/js/requestSchoolInfo.js"></script>
+<script src="/stuinfo/js/json2.js"></script>
 <script>
   //注意：导航 依赖 element 模块，否则无法进行功能性操作
   layui.use('element', function () {
@@ -180,20 +183,6 @@
     //…
   });
 
-  layui.use('form', function () {
-    /**
-     * 学院选择事件
-     */
-    // layui.form.on('select(collegeChange)', function () {
-    //   let collegeIndex = $('#college_select_id').val();
-    //   if (collegeIndex) {
-    //     queryDepart(collegeIds[collegeIndex])
-    //   } else {
-    //     table_input_info_id_vue.departs = [];
-    //     renderFrom();
-    //   }
-    // });
-  });
 </script>
 <script>
   var table_info_id_vue = new Vue({
@@ -274,6 +263,7 @@
               table_info_show_id_vue.departInDeparts = outerDepartInDeparts;
 
             }
+            ;
           } else {
             myAlert('没有满足以上条件的数据!!!')
           }
@@ -314,38 +304,148 @@
 
       collegeInColleges: [],
       departInDeparts: [],
-      //id
-      collegeIds: [],
-      departIds: [],
+      colleges: [],
+      departs: [],
     },
     updated: function () {
       this.$nextTick(function () {
         setTimeout(function () {
-          layui.form.render();
-        }, 100);
-        layui.use('laypage', function () {
-          var laypage = layui.laypage;
-          //执行一个laypage实例
-          //默认limit:10
-          laypage.render({
-            elem: 'page_div_id' //注意，这里的 test1 是 ID，不用加 # 号
-            , count: table_info_show_id_vue.stuNumbers.length //数据总数，从服务端得到
-            , jump: function (obj, first) {
-              //obj包含了当前分页的所有参数，比如：
-              // console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
-              // console.log(obj.limit); //得到每页显示的条数
-
-              //首次不执行
-              if (!first) {
-                //do something
-              }
+          layui.use('form', function () {
+            layui.form.render();
+            /**
+             * 学院选择事件
+             */
+            for (let i = 0; i < table_info_show_id_vue.stuNumbers.length; i++) {
+              layui.form.on('select(college' + i + ')', function (select) {
+                if (select.value) {
+                  //获取当前点击的学院的下拉框所在的下表
+                  let index = select.elem.id.split('id')[1];
+                  // console.log(table_info_show_id_vue.collegeInColleges[index][0])
+                  if (select.value !== table_info_show_id_vue.collegeInColleges[index][0]) {
+                    // console.log(collegeIds[outerColleges.indexOf(select.value)])
+                    queryDepart(collegeIds[outerColleges.indexOf(select.value)], undefined, index,
+                        true);
+                  } else {
+                    queryDepart(collegeIds[outerColleges.indexOf(select.value)],
+                        departInDepartsIds[index][outerDepartInDeparts[index].indexOf(
+                            table_info_show_id_vue.departs[index])], index,
+                        true);
+                  }
+                }
+              });
             }
           });
-        });
+        }, 100);
+
+        /**
+         * 分页
+         */
+        // layui.use('laypage', function () {
+        //   var laypage = layui.laypage;
+        //   //执行一个laypage实例
+        //   //默认limit:10
+        //   laypage.render({
+        //     elem: 'page_div_id' //注意，这里的 test1 是 ID，不用加 # 号
+        //     , count: table_info_show_id_vue.stuNumbers.length //数据总数，从服务端得到
+        //     , jump: function (obj, first) {
+        //       //obj包含了当前分页的所有参数，比如：
+        //       // console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+        //       // console.log(obj.limit); //得到每页显示的条数
+        //
+        //       //首次不执行
+        //       if (!first) {
+        //         //do something
+        //       }
+        //     }
+        //   });
+        // });
       })
     },
     methods: {
       edit(index) {
+        //校验信息合法性
+        let stuInfo = {};
+        if (!$('#stuNumber' + index).val().trim()) {
+          myAlert('请输入学号!!!');
+          return;
+        }
+        let stuNumber = this.stuNumbers[index];
+        if ($('#stuNumber' + index).val().trim() !== this.stuNumbers[index]) {
+          stuNumber = stuInfo.stuNumber = $('#stuNumber' + index).val().trim();
+        }
+
+        if (!$('#stuClass' + index).val().trim()) {
+          myAlert('请输入班级!!!');
+          return;
+        }
+        stuInfo.stuClass = $('#stuClass' + index).val().trim();
+
+        if (!$('#name' + index).val().trim()) {
+          myAlert('请输入姓名!!!');
+          return;
+        }
+        stuInfo.name = $('#name' + index).val().trim();
+
+        if (!$('#password' + index).val().trim()) {
+          myAlert('请输入密码!!!');
+          return;
+        }
+        stuInfo.password = $('#password' + index).val().trim();
+
+        if (!$('#inSchoolYear' + index).val().trim()) {
+          myAlert('请输入入学年线!!!');
+          return;
+        }
+        stuInfo.inSchoolYear = $('#inSchoolYear' + index).val().trim();
+
+        stuInfo.phone = $('#phone' + index).val().trim();
+
+        if ($('#change_college_id' + index).val()) {
+          if ($('#change_college_id' + index).val() !== this.colleges[index]) {
+            if (!$('#change_depart_id' + index).val()) {
+              myAlert('换学院必须换系!!!');
+              return;
+            }
+          }
+        }
+
+        if (!$('#change_college_id' + index).val()) {
+          stuInfo.college = collegeIds[outerColleges.indexOf(this.colleges[index])];
+        } else {
+          stuInfo.college = collegeIds[outerColleges.indexOf(
+              $('#change_college_id' + index).val())];
+        }
+        if (!$('#change_depart_id' + index).val()) {
+          stuInfo.depart = departInDepartsIds[index][outerDepartInDeparts[index].indexOf(
+              this.departs[index])];
+        } else {
+          stuInfo.depart = departInDepartsIds[index][outerDepartInDeparts[index].indexOf(
+              $('#change_depart_id' + index).val())];
+        }
+
+        /**
+         * 修改信息
+         */
+        console.log(stuInfo);
+        let formData = new FormData();
+        formData.append('stuInfo', JSON.stringify(stuInfo));
+        formData.append('oldStuNumber', stuNumber)
+        $.ajax({
+          method: 'post',
+          url: '/stuinfo/sctc/usi',
+          data: formData,
+          contentType: false,
+          processData: false,
+          success: function (response) {
+            if (response) {
+              table_info_id_vue.queryUserInfo(1);
+              myAlert('修改成功!!!');
+            } else {
+              myAlert('该学号已存在,修改失败!!!');
+            }
+          }
+        });
+
       },
       del(index) {
 
@@ -386,7 +486,7 @@
    * 获取系信息
    */
 
-  function queryDepart(collegeId, departId, index) {
+  function queryDepart(collegeId, departId, index, partQuery) {
     $.ajax({
       method: 'post',
       url: '/stuinfo/sic/qds',
@@ -409,30 +509,60 @@
             }
           });
           if (tempDeparts.length > 0) {
-            let tempColleges = [];
-            tempColleges.push(outerColleges[collegeIds.indexOf(collegeId)]);
-            for (let outerCollege of outerColleges) {
-              if (tempColleges.indexOf(outerCollege) === -1) {
-                tempColleges.push(outerCollege);
-              }
-            }
-            // console.log(tempColleges)
-            //系下拉框第一个显示得操作
-            let departIndex = tempDepartIds.indexOf(departId);
-            let a = tempDeparts[0];
-            tempDeparts[0] = tempDeparts[departIndex];
-            tempDeparts[departIndex] = a;
-            let b = tempDependCollegeIds[0];
-            tempDependCollegeIds[0] = tempDependCollegeIds[departIndex];
-            tempDependCollegeIds[departIndex] = b;
-            let c = tempDeparts[0];
-            tempDepartIds[0] = tempDepartIds[departIndex];
-            tempDepartIds[departIndex] = c;
+            function inner() {
+              // console.log(tempColleges)
+              //系下拉框第一个显示得操作
+              let departIndex = tempDepartIds.indexOf(departId);
+              let a = tempDeparts[0];
+              tempDeparts[0] = tempDeparts[departIndex];
+              tempDeparts[departIndex] = a;
 
-            outerDepartInDeparts[index] = tempDeparts;
-            departInDepartsDependCollegeIds[index] = tempDependCollegeIds;
-            departInDepartsIds[index] = tempDepartIds;
-            outerCollegeInColleges[index] = tempColleges;
+              if (!partQuery) {
+                table_info_show_id_vue.departs[index] = tempDeparts[0];
+              }
+
+              let b = tempDependCollegeIds[0];
+              tempDependCollegeIds[0] = tempDependCollegeIds[departIndex];
+              tempDependCollegeIds[departIndex] = b;
+              let c = tempDeparts[0];
+              tempDepartIds[0] = tempDepartIds[departIndex];
+              tempDepartIds[departIndex] = c;
+            }
+
+            /**
+             * 点击某一行的查询
+             */
+            if (partQuery) {
+              if (departId) {
+                inner();
+              }
+              outerDepartInDeparts[index] = tempDeparts;
+              departInDepartsDependCollegeIds[index] = tempDependCollegeIds;
+              departInDepartsIds[index] = tempDepartIds;
+              console.log(outerDepartInDeparts[index]);
+              table_info_show_id_vue.departInDeparts = [];
+              table_info_show_id_vue.departInDeparts = outerDepartInDeparts;
+            }
+            /**
+             * 初次条件查询
+             */
+            else {
+              let tempColleges = [];
+              tempColleges.push(outerColleges[collegeIds.indexOf(collegeId)]);
+              table_info_show_id_vue.colleges[index] = tempColleges[0];
+              for (let outerCollege of outerColleges) {
+                if (tempColleges.indexOf(outerCollege) === -1) {
+                  tempColleges.push(outerCollege);
+                }
+              }
+
+              inner();
+
+              outerDepartInDeparts[index] = tempDeparts;
+              departInDepartsDependCollegeIds[index] = tempDependCollegeIds;
+              departInDepartsIds[index] = tempDepartIds;
+              outerCollegeInColleges[index] = tempColleges;
+            }
           }
           return;
         }

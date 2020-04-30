@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -66,17 +67,19 @@ public interface StuAndTeacInfoMapper {
       "<script>",
       "update tb_stu",
       "<trim prefix='set' prefixOverrides=','>",
-      "<if test='stuClass !=null'>stuClass=#{stuClass}</if>",
-      "<if test='name !=null'>,name=#{name}</if>",
-      "<if test='password !=null'>,password=#{password}</if>",
-      "<if test='college !=null'>,college=#{college}</if>",
-      "<if test='depart !=null'>,depart=#{depart}</if>",
-      "<if test='phone !=null'>,phone=#{phone}</if>",
+      "<if test='stuInfo.stuNumber !=null'>stuNumber=#{stuInfo.stuNumber}</if>",
+      "<if test='stuInfo.stuClass !=null'>stuClass=#{stuInfo.stuClass}</if>",
+      "<if test='stuInfo.name !=null'>,name=#{stuInfo.name}</if>",
+      "<if test='stuInfo.password !=null'>,password=#{stuInfo.password}</if>",
+      "<if test='stuInfo.college !=null'>,college=#{stuInfo.college}</if>",
+      "<if test='stuInfo.depart !=null'>,depart=#{stuInfo.depart}</if>",
+      "<if test='stuInfo.phone !=null'>,phone=#{stuInfo.phone}</if>",
+      "<if test='stuInfo.inSchoolYear !=null'>,inSchoolYear=#{stuInfo.inSchoolYear}</if>",
       "</trim>",
-      " where stuNumber=#{stuNumber}",
+      " where stuNumber=#{oldStuNumber}",
       "</script>"
   })
-  Integer updateStuInfo(StuInfo stuInfo);
+  Integer updateStuInfo(StuInfo stuInfo, String oldStuNumber);
 
 
   @Delete({
@@ -136,16 +139,18 @@ public interface StuAndTeacInfoMapper {
       "<script>",
       "update tb_teacher",
       "<trim prefix='set' prefixOverrides=','>",
-      "<if test='name !=null'>,name=#{name}</if>",
-      "<if test='password !=null'>,password=#{password}</if>",
-      "<if test='college !=null'>,college=#{college}</if>",
-      "<if test='depart !=null'>,depart=#{depart}</if>",
-      "<if test='phone !=null'>,phone=#{phone}</if>",
+      "<if test='teacherInfo.teacherNumber !=null'>teacherNumber=#{teacherInfo.teacherNumber}</if>",
+      "<if test='teacherInfo.name !=null'>,name=#{teacherInfo.name}</if>",
+      "<if test='teacherInfo.password !=null'>,password=#{teacherInfo.password}</if>",
+      "<if test='teacherInfo.college !=null'>,college=#{teacherInfo.college}</if>",
+      "<if test='teacherInfo.depart !=null'>,depart=#{teacherInfo.depart}</if>",
+      "<if test='teacherInfo.phone !=null'>,phone=#{teacherInfo.phone}</if>",
+      "<if test='teacherInfo.inSchoolYear !=null'>,phone=#{teacherInfo.inSchoolYear}</if>",
       "</trim>",
-      " where teacherNumber=#{teacherNumber}",
+      " where oldTeacherNumber=#{oldTeacherNumber}",
       "</script>"
   })
-  Integer updateTeacherInfo(TeacherInfo teacherInfo);
+  Integer updateTeacherInfo(TeacherInfo teacherInfo, String oldTeacherNumber);
 
   @Delete({
       "<script>",
