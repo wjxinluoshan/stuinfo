@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="14dbec59-18af-4c74-a09f-c404794f176b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/config/DisPatcherServletConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/config/DisPatcherServletConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/controller/StuAndTeacController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/controller/StuAndTeacController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/mapper/StuAndTeacInfoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/mapper/StuAndTeacInfoMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/mapperimpl/StuAndTeacInfoMapperImple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/mapperimpl/StuAndTeacInfoMapperImple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/pojo/TeacherInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/pojo/TeacherInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/pojo/TeacherInfoCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/pojo/TeacherInfoCondition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/show/adminstudent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/show/adminstudent.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/student/student_info_manager.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/student/student_info_manager.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/config/DisPatcherServletConfig$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/config/DisPatcherServletConfig$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/config/DisPatcherServletConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/config/DisPatcherServletConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/controller/StuAndTeacController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/controller/StuAndTeacController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/mapper/StuAndTeacInfoMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/mapper/StuAndTeacInfoMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/mapperimpl/StuAndTeacInfoMapperImple.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/mapperimpl/StuAndTeacInfoMapperImple.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/pojo/TeacherInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/pojo/TeacherInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/pojo/TeacherInfoCondition.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/pojo/TeacherInfoCondition.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/student/input_stu_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/student/input_stu_info.html" afterDir="false" />
-    </list>
+    <list default="true" id="14dbec59-18af-4c74-a09f-c404794f176b" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -234,7 +216,7 @@
       <workItem from="1588035009492" duration="125000" />
       <workItem from="1588038090030" duration="34793000" />
       <workItem from="1588123084047" duration="38231000" />
-      <workItem from="1588208853654" duration="14828000" />
+      <workItem from="1588208853654" duration="15446000" />
     </task>
     <servers />
   </component>
