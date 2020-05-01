@@ -20,7 +20,7 @@ public class LoginController {
    */
   @PostMapping("/lsort")
   @ResponseBody
-  public String login(Login login) {
+  public Integer login(Login login) {
     return loginMapperImple.login(login);
   }
 

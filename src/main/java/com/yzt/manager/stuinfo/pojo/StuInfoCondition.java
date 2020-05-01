@@ -8,12 +8,20 @@ public class StuInfoCondition {
    * college : 0
    * depart : 1
    */
-
+  private Integer id=null;
   private String stuNumber=null;
   private String stuClass=null;
   private Integer college=null;
   private Integer depart=null;
   private String inSchoolYear;
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
   public String getInSchoolYear() {
     return inSchoolYear;

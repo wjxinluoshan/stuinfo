@@ -53,10 +53,9 @@
   $.post('/stuinfo/sctc/qifp', function (response) {
     if (response) {
       //学生
-      console.log(response)
-      console.log(response.split(',')[0])
+      console.log(response);
       //0就是关闭
-      if (response.split(',')[0] === 0) {
+      if (response.split(',')[0] == 0) {
         $('#btn_stu_prize_id').html('打开');
         $('#btn_stu_prize_id').val(0);
       } else {
@@ -66,7 +65,7 @@
       }
 
       //教师
-      if (response.split(',')[1] === 0) {
+      if (response.split(',')[1] == 0) {
         $('#btn_teacher_prize_id').html('打开');
         $('#btn_teacher_prize_id').val(0);
       } else {
@@ -120,7 +119,7 @@
     switch (type) {
         //获奖情况
       case 1:
-        if ($('#btn_stu_prize_id').val() === 0) {
+        if ($('#btn_stu_prize_id').val() == 0) {
           changeFilePrivilege(1, 1);
         } else {
           changeFilePrivilege(0, 1);
@@ -131,13 +130,12 @@
          */
         //获奖
       case 0:
-        if ($('#btn_teacher_prize_id').val() === 0) {
+        if ($('#btn_teacher_prize_id').val() == 0) {
           changeFilePrivilege(1, 0);
         } else {
           changeFilePrivilege(0, 0);
         }
         break;
-
     }
   }
 

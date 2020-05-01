@@ -11,7 +11,7 @@
 <body>
 <img style="position: absolute;z-index: -1;width: 100%;height: 100%;"
      src="/stuinfo/sysimg/welcom_bg.jpg"/>
-<h1 id="h1_id" style="text-align: center">你好，{{cmderName}},祝您工作愉快！！！</h1>
+<h1 id="h1_id" style="text-align: center">您好，{{cmderName}},祝您工作愉快！！！</h1>
 </body>
 <script>
   var h1_id_vue = new Vue({
@@ -27,6 +27,9 @@
       break;
     case '1':
       h1_id_vue.cmderName = '教师';
+      break;
+    case '2':
+      document.getElementById('h1_id').innerHTML = '你好，祝你学习步步高升！！！'
       break;
   }
 </script>

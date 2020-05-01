@@ -53,6 +53,7 @@ public interface StuAndTeacInfoMapper {
       "select * from tb_stu",
       "<where>",
       "<if test='stuNumber!=null'>stuNumber=#{stuNumber}</if>",
+      "<if test='id!=null'> and id=#{id}</if>",
       "<if test='stuClass!=null'> and stuClass=#{stuClass}</if>",
       "<if test='college!=null'> and college=#{college}</if>",
       "<if test='depart!=null'> and depart=#{depart}</if>",
@@ -92,13 +93,14 @@ public interface StuAndTeacInfoMapper {
       , "</where>"
       , "</script>"
   })
-  Integer deleteStuInfo(String stuNumber, String inSchoolYear,Integer id);
+  Integer deleteStuInfo(String stuNumber, String inSchoolYear, Integer id);
 
   @Update("update tb_upload_file_privilege set openStuPrize=#{tag}")
   Integer openStuInfoPrize(Integer tag);
 
   @Select("select openStuPrize from tb_upload_file_privilege")
   Integer selectStuInfoPrize();
+
   /**
    * 老师信息
    */
@@ -136,6 +138,7 @@ public interface StuAndTeacInfoMapper {
       "select * from tb_teacher",
       "<where>",
       "<if test='teacherNumber!=null'>teacherNumber=#{teacherNumber}</if>",
+      "<if test='id!=null'> and id=#{id}</if>",
       "<if test='teacherClass!=null'> and teacherClass=#{teacherClass}</if>",
       "<if test='college!=null'> and college=#{college}</if>",
       "<if test='depart!=null'> and depart=#{depart}</if>",
@@ -172,7 +175,7 @@ public interface StuAndTeacInfoMapper {
       "</where>",
       "</script>"
   })
-  Integer deleteTeacherInfo(String teacherNumber,Integer id);
+  Integer deleteTeacherInfo(String teacherNumber, Integer id);
 
   @Update("update tb_upload_file_privilege set openTeacherPrize=#{tag}")
   Integer openTeacherInfoPrize(Integer tag);

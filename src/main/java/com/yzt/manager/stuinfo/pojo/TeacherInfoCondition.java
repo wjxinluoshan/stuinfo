@@ -6,11 +6,20 @@ public class TeacherInfoCondition {
    * stuNumber : stuClass : college : 0 depart : 1
    */
 
+  private Integer id=null;
   private String teacherNumber=null;
   private String teacherClass=null;
   private Integer college=null;
   private Integer depart=null;
   private String inSchoolYear=null;
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
   public String getInSchoolYear() {
     return inSchoolYear;

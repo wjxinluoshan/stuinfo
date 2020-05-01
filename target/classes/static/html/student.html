@@ -3,8 +3,104 @@
 <head>
   <meta charset="UTF-8">
   <title>学生</title>
+  <link rel="stylesheet" href="/stuinfo/layui/css/layui.css">
+  <script src="/stuinfo/layui/layui.js"></script>
+  <script src="/stuinfo/js/vue.js"></script>
+  <script src="/stuinfo/js/jquery.min.js"></script>
+  <script src="/stuinfo/js/json2.js"></script>
+
 </head>
 <body>
+<ul style="text-align: center" class="layui-nav" id="nav_id" lay-filter="">
+  <li class="layui-nav-item layui-this"><a id="a_welcom">欢迎页面</a></li>
+  <li class="layui-nav-item"><a id="a_upload">上传</a></li>
+  <li class="layui-nav-item"><a id="a_mine">我的</a></li>
+</ul>
+<iframe id="iframe_id" width="100%" src="/stuinfo/html/welcom.html?type=2"></iframe>
+<script>
+  //注意：导航 依赖 element 模块，否则无法进行功能性操作
+  layui.use('element', function () {
+    var element = layui.element;
 
+    //…
+  });
+  var layer;
+  layui.use('layer', function () {
+    layer = layui.layer;
+  });
+</script>
 </body>
+<script>
+  //根据url解析出id
+  var id = window.location.href.split('=')[1];
+  /**
+   * 检查密码，如果密码为123456，则提示学生修改密码
+   */
+  $.post('/stuinfo/sctc/qsis', {id: id}, function (response) {
+    console.log(response)
+    if (response) {
+      try {
+        if (response[0].password === '123456') {
+          layer.prompt({
+            formType: 2,
+            value: '123456',
+            title: '请输入新密码(前后空格无效)',
+            area: ['300px', '50px'] //自定义文本域宽高
+          }, function (value, index, elem) {
+            if (value.trim()) {
+              let formData = new FormData();
+              formData.append('stuInfo', JSON.stringify({password: value.trim()}));
+              formData.append('oldStuNumber', response[0].stuNumber);
+              $.ajax({
+                method: 'post',
+                url: '/stuinfo/sctc/usi',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                  if (response) {
+                    myAlert('密码修改成功!!!');
+                  } else {
+                    myAlert('密码修改失败!!!');
+                  }
+                }
+              });
+            }
+            layer.close(index);
+          });
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+  });
+
+  $('#iframe_id').css('height', window.innerHeight - $('#nav_id').height() + 'px');
+
+  var jumpPageToIframe = function (eleId, src) {
+    $('#' + eleId).on('click', () => {
+      document.getElementById('iframe_id').src = src;
+    });
+  };
+  /**
+   *欢迎页面
+   */
+  jumpPageToIframe('a_welcom', '/stuinfo/html/welcom.html?type=2');
+  /**
+   * 跳转到上传页面
+   */
+  jumpPageToIframe('a_upload', '/stuinfo/student/upload.html');
+  //跳转到我的管理页面
+  jumpPageToIframe('a_mine', '/stuinfo/student/mine.html');
+
+  function myAlert(content) {
+    layer.open({
+      title: '提示'
+      , content: content
+    });
+  }
+</script>
+<script>
+</script>
 </html>

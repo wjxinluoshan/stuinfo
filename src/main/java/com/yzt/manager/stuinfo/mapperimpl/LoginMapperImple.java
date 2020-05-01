@@ -12,16 +12,16 @@ public class LoginMapperImple implements LoginMapper {
   private LoginMapper loginMapper;
 
   @Override
-  public String login(String userNumber, String password, String isTeacher) {
+  public Integer login(String userNumber, String password, String isTeacher) {
     return loginMapper.login(userNumber, password, isTeacher);
   }
 
   @Override
-  public String adminLogin(String accountName, String password) {
+  public Integer adminLogin(String accountName, String password) {
     return loginMapper.adminLogin(accountName, password);
   }
 
-  public String login(Login login) {
+  public Integer login(Login login) {
     //得到登录时的标志位
     String mark = login.getMark();
     //判断当卡登录者得身份
