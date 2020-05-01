@@ -73,7 +73,7 @@
             userNumber: this.accountName,
             password: this.password,
             mark: mark
-          });
+          }, mark);
           //验证用户信息
           return;
         }
@@ -83,13 +83,28 @@
     }
   });
 
-  var verifyLoginInfoAjax = function (data) {
+  var verifyLoginInfoAjax = function (data, mark) {
     $.post("/stuinfo/login/lsort", data, function (response) {
       //验证成功
       if (response) {
-        console.log("success")
-        return;
         //跳转页面
+        switch (mark) {
+            //学生
+          case "0":
+
+            break;
+            //老师
+          case "1":
+
+            break;
+            //admin
+          case "2":
+            window.location.href = '/stuinfo/html/admin.html';
+            break;
+
+        }
+        return;
+
       }
       alertInfo("提示", "用户信息验证失败!!!");
     })

@@ -68,7 +68,7 @@ public interface StuAndTeacInfoMapper {
       "update tb_stu",
       "<trim prefix='set' prefixOverrides=','>",
       "<if test='stuInfo.stuNumber !=null'>stuNumber=#{stuInfo.stuNumber}</if>",
-      "<if test='stuInfo.stuClass !=null'>stuClass=#{stuInfo.stuClass}</if>",
+      "<if test='stuInfo.stuClass !=null'>,stuClass=#{stuInfo.stuClass}</if>",
       "<if test='stuInfo.name !=null'>,name=#{stuInfo.name}</if>",
       "<if test='stuInfo.password !=null'>,password=#{stuInfo.password}</if>",
       "<if test='stuInfo.college !=null'>,college=#{stuInfo.college}</if>",
@@ -87,12 +87,18 @@ public interface StuAndTeacInfoMapper {
       "delete from tb_stu",
       "<where>",
       "<if test='stuNumber != null'>stuNumber=#{stuNumber}</if>",
-      "<if test='inSchoolYear!=null'>and inSchoolYear=#{inSchoolYear}</if>"
+      "<if test='inSchoolYear!=null'>and inSchoolYear=#{inSchoolYear}</if>",
+      "<if test='id!=null'>and id=#{id}</if>"
       , "</where>"
       , "</script>"
   })
-  Integer deleteStuInfo(String stuNumber, String inSchoolYear);
+  Integer deleteStuInfo(String stuNumber, String inSchoolYear,Integer id);
 
+  @Update("update tb_upload_file_privilege set openStuPrize=#{tag}")
+  Integer openStuInfoPrize(Integer tag);
+
+  @Select("select openStuPrize from tb_upload_file_privilege")
+  Integer selectStuInfoPrize();
   /**
    * 老师信息
    */
@@ -101,6 +107,7 @@ public interface StuAndTeacInfoMapper {
       "insert into tb_teacher(",
       "<trim prefix='' prefixOverrides=','>",
       "<if test='teacherNumber !=null'>teacherNumber</if>",
+      "<if test='teacherClass !=null'>,teacherClass</if>",
       "<if test='name !=null'>,name</if>",
       "<if test='password !=null'>,password</if>",
       "<if test='college !=null'>,college</if>",
@@ -110,7 +117,8 @@ public interface StuAndTeacInfoMapper {
       "</trim>",
       ") values(",
       "<trim prefix='' prefixOverrides=','>",
-      "<if test='teacherNumber !=null'>{teacherNumber}</if>",
+      "<if test='teacherNumber !=null'>#{teacherNumber}</if>",
+      "<if test='teacherClass !=null'>,#{teacherClass}</if>",
       "<if test='name !=null'>,#{name}</if>",
       "<if test='password !=null'>,#{password}</if>",
       "<if test='college !=null'>,#{college}</if>",
@@ -128,8 +136,10 @@ public interface StuAndTeacInfoMapper {
       "select * from tb_teacher",
       "<where>",
       "<if test='teacherNumber!=null'>teacherNumber=#{teacherNumber}</if>",
+      "<if test='teacherClass!=null'> and teacherClass=#{teacherClass}</if>",
       "<if test='college!=null'> and college=#{college}</if>",
       "<if test='depart!=null'> and depart=#{depart}</if>",
+      "<if test='inSchoolYear!=null'> and inSchoolYear=#{inSchoolYear}</if>",
       "</where>",
       "</script>"
   })
@@ -140,6 +150,7 @@ public interface StuAndTeacInfoMapper {
       "update tb_teacher",
       "<trim prefix='set' prefixOverrides=','>",
       "<if test='teacherInfo.teacherNumber !=null'>teacherNumber=#{teacherInfo.teacherNumber}</if>",
+      "<if test='teacherInfo.teacherClass !=null'>,teacherClass=#{teacherInfo.teacherClass}</if>",
       "<if test='teacherInfo.name !=null'>,name=#{teacherInfo.name}</if>",
       "<if test='teacherInfo.password !=null'>,password=#{teacherInfo.password}</if>",
       "<if test='teacherInfo.college !=null'>,college=#{teacherInfo.college}</if>",
@@ -147,7 +158,7 @@ public interface StuAndTeacInfoMapper {
       "<if test='teacherInfo.phone !=null'>,phone=#{teacherInfo.phone}</if>",
       "<if test='teacherInfo.inSchoolYear !=null'>,phone=#{teacherInfo.inSchoolYear}</if>",
       "</trim>",
-      " where oldTeacherNumber=#{oldTeacherNumber}",
+      " where teacherNumber=#{oldTeacherNumber}",
       "</script>"
   })
   Integer updateTeacherInfo(TeacherInfo teacherInfo, String oldTeacherNumber);
@@ -157,8 +168,16 @@ public interface StuAndTeacInfoMapper {
       "delete from tb_teacher",
       "<where>",
       "<if test='teacherNumber != null'>teacherNumber=#{teacherNumber}</if>",
+      "<if test='id != null'>id=#{id}</if>",
       "</where>",
       "</script>"
   })
-  Integer deleteTeacherInfo(String teacherNumber);
+  Integer deleteTeacherInfo(String teacherNumber,Integer id);
+
+  @Update("update tb_upload_file_privilege set openTeacherPrize=#{tag}")
+  Integer openTeacherInfoPrize(Integer tag);
+
+  @Select("select openTeacherPrize from tb_upload_file_privilege")
+  Integer selectTeacherInfoPrize();
+
 }

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>文件上传权限</title>
+  <link rel="stylesheet" href="/stuinfo/layui/css/layui.css">
+  <script src="/stuinfo/layui/layui.js"></script>
+  <script src="/stuinfo/js/vue.js"></script>
+  <script src="/stuinfo/js/jquery.min.js"></script>
+  <style>
+    td {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<table class="layui-table" lay-skin="row">
+  <thead>
+  <tr>
+    <th style="text-align: center">学生</th>
+    <th style="text-align: center">教师</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>
+      <label>学生获奖情况</label>
+    </td>
+    <td>
+      <label>教师获奖情况</label>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <button id="btn_stu_prize_id" class="layui-btn layui-btn-radius layui-btn-primary"
+              value="0">打开
+      </button>
+    </td>
+    <td>
+      <button id="btn_teacher_prize_id" class="layui-btn layui-btn-radius layui-btn-primary"
+              value="0">打开
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+<script>
+
+  /**
+   * 查询文件上传权限
+   */
+  $.post('/stuinfo/sctc/qifp', function (response) {
+    if (response) {
+      //学生
+      console.log(response)
+      console.log(response.split(',')[0])
+      //0就是关闭
+      if (response.split(',')[0] === 0) {
+        $('#btn_stu_prize_id').html('打开');
+        $('#btn_stu_prize_id').val(0);
+      } else {
+        $('#btn_stu_prize_id').html('关闭');
+        $('#btn_stu_prize_id').val(1);
+
+      }
+
+      //教师
+      if (response.split(',')[1] === 0) {
+        $('#btn_teacher_prize_id').html('打开');
+        $('#btn_teacher_prize_id').val(0);
+      } else {
+        $('#btn_teacher_prize_id').html('关闭');
+        $('#btn_teacher_prize_id').val(1);
+
+      }
+    }
+  });
+
+  function changeFilePrivilege(isOpen, isTeacher) {
+    $.post('/stuinfo/sctc/oifp', {isOpen: isOpen, isTeacher: isTeacher}, function (response) {
+      /**
+       * 更新成功，改变按钮字样
+       */
+      if (response) {
+        if (isTeacher === 0) {
+          if (isOpen === 0) {
+            $('#btn_teacher_prize_id').html('打开');
+            $('#btn_teacher_prize_id').val(0);
+          } else {
+            $('#btn_teacher_prize_id').html('关闭');
+            $('#btn_teacher_prize_id').val(1);
+          }
+        } else {
+          if (isOpen === 0) {
+            $('#btn_stu_prize_id').html('打开');
+            $('#btn_stu_prize_id').val(0);
+
+          } else {
+            $('#btn_stu_prize_id').html('关闭');
+            $('#btn_stu_prize_id').val(1);
+          }
+        }
+      }
+    })
+  }
+
+  /**
+   * 按钮点击事件
+   */
+  $('#btn_stu_prize_id').on('click', function () {
+    click(1);
+  });
+
+  $('#btn_teacher_prize_id').on('click', function () {
+    click(0);
+  });
+
+  function click(type) {
+    switch (type) {
+        //获奖情况
+      case 1:
+        if ($('#btn_stu_prize_id').val() === 0) {
+          changeFilePrivilege(1, 1);
+        } else {
+          changeFilePrivilege(0, 1);
+        }
+        break;
+        /**
+         * 老师
+         */
+        //获奖
+      case 0:
+        if ($('#btn_teacher_prize_id').val() === 0) {
+          changeFilePrivilege(1, 0);
+        } else {
+          changeFilePrivilege(0, 0);
+        }
+        break;
+
+    }
+  }
+
+</script>
+</html>

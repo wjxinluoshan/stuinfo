@@ -10,6 +10,15 @@ public class TeacherInfoCondition {
   private String teacherClass=null;
   private Integer college=null;
   private Integer depart=null;
+  private String inSchoolYear=null;
+
+  public String getInSchoolYear() {
+    return inSchoolYear;
+  }
+
+  public void setInSchoolYear(String inSchoolYear) {
+    this.inSchoolYear = inSchoolYear;
+  }
 
   public String getTeacherClass() {
     return teacherClass;

@@ -164,11 +164,11 @@
       </div>
     </td>
   </tr>
-<!--  <tr>-->
-<!--    <td>-->
-<!--      <div id="page_div_id" v-if="stuNumbers.length>0"></div>-->
-<!--    </td>-->
-<!--  </tr>-->
+  <!--  <tr>-->
+  <!--    <td>-->
+  <!--      <div id="page_div_id" v-if="stuNumbers.length>0"></div>-->
+  <!--    </td>-->
+  <!--  </tr>-->
   <tbody>
   </tbody>
 </table>
@@ -236,7 +236,7 @@
       try {
         if (response) {
           if (response.length > 0) {
-            let t1 = [], t2 = [], t3 = [], t4 = [], t5 = [], t6 = [], t7 = [], t8 = [];
+            let t1 = [], t2 = [], t3 = [], t4 = [], t5 = [], t6 = [], t7 = [], t8 = [], t9 = [];
             response.forEach((obj, index) => {
               t1.push(obj.stuNumber);
               t2.push(obj.stuClass);
@@ -247,6 +247,7 @@
               // t6.push(obj.depart);
               t7.push(obj.phone);
               t8.push(obj.inSchoolYear);
+              t9.push(obj.id);
 
               queryDepart(obj.college, obj.depart, index);
             });
@@ -259,6 +260,7 @@
               // table_info_show_id_vue.departInDepartsIds = t6;
               table_info_show_id_vue.phones = t7;
               table_info_show_id_vue.inSchoolYears = t8;
+              table_info_show_id_vue.ids = t9;
               table_info_show_id_vue.collegeInColleges = outerCollegeInColleges;
               table_info_show_id_vue.departInDeparts = outerDepartInDeparts;
 
@@ -291,10 +293,10 @@
   /**
    * 查询结果显示区域
    */
-
   var table_info_show_id_vue = new Vue({
     el: '#table_info_show_id',
     data: {
+      ids: [],
       stuNumbers: [],
       stuClasses: [],
       names: [],
@@ -318,7 +320,7 @@
             for (let i = 0; i < table_info_show_id_vue.stuNumbers.length; i++) {
               layui.form.on('select(college' + i + ')', function (select) {
                 if (select.value) {
-                  //获取当前点击的学院的下拉框所在的下表
+                  //获取当前点击的学院的下拉框所在的下标
                   let index = select.elem.id.split('id')[1];
                   // console.log(table_info_show_id_vue.collegeInColleges[index][0])
                   if (select.value !== table_info_show_id_vue.collegeInColleges[index][0]) {
@@ -369,9 +371,8 @@
           myAlert('请输入学号!!!');
           return;
         }
-        let stuNumber = this.stuNumbers[index];
         if ($('#stuNumber' + index).val().trim() !== this.stuNumbers[index]) {
-          stuNumber = stuInfo.stuNumber = $('#stuNumber' + index).val().trim();
+          stuInfo.stuNumber = $('#stuNumber' + index).val().trim();
         }
 
         if (!$('#stuClass' + index).val().trim()) {
@@ -429,7 +430,7 @@
         console.log(stuInfo);
         let formData = new FormData();
         formData.append('stuInfo', JSON.stringify(stuInfo));
-        formData.append('oldStuNumber', stuNumber)
+        formData.append('oldStuNumber', this.stuNumbers[index]);
         $.ajax({
           method: 'post',
           url: '/stuinfo/sctc/usi',
@@ -438,6 +439,9 @@
           processData: false,
           success: function (response) {
             if (response) {
+              if ($('#stuNumber' + index).val().trim() !== table_info_show_id_vue.stuNumbers[index]) {
+                table_info_show_id_vue.stuNumbers[index] = $('#stuNumber' + index).val().trim();
+              }
               table_info_id_vue.queryUserInfo(1);
               myAlert('修改成功!!!');
             } else {
@@ -448,7 +452,18 @@
 
       },
       del(index) {
-
+        //得到当前操作的id
+        if (confirm('确认删除学生学号为:' + this.stuNumbers[index] + " 的学生?")) {
+          $.post('/stuinfo/sctc/delsi', {id: this.ids[index]}, function (response) {
+            if (response) {
+              myAlert('删除成功!!!');
+              //重新查询数据
+              table_info_id_vue.queryUserInfo(1);
+            }
+          }).fail(function () {
+            myAlert('删除失败!!!')
+          });
+        }
       },
     }
   });
@@ -524,7 +539,8 @@
               let b = tempDependCollegeIds[0];
               tempDependCollegeIds[0] = tempDependCollegeIds[departIndex];
               tempDependCollegeIds[departIndex] = b;
-              let c = tempDeparts[0];
+
+              let c = tempDepartIds[0];
               tempDepartIds[0] = tempDepartIds[departIndex];
               tempDepartIds[departIndex] = c;
             }

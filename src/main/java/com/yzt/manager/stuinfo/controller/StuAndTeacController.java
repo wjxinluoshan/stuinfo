@@ -85,15 +85,15 @@ public class StuAndTeacController {
   //修改学生信息
   @PostMapping("/usi")
   @ResponseBody
-  public Integer updateStuInfo(StuInfo stuInfo,String oldStuNumber) {
-    return stuAndTeacInfoMapperImple.updateStuInfo(stuInfo,oldStuNumber);
+  public Integer updateStuInfo(StuInfo stuInfo, String oldStuNumber) {
+    return stuAndTeacInfoMapperImple.updateStuInfo(stuInfo, oldStuNumber);
   }
 
   //修改老师信息
   @PostMapping("/uti")
   @ResponseBody
-  public Integer updateTeacherInfo(TeacherInfo teacherInfo,String oldTeacherNumber) {
-    return stuAndTeacInfoMapperImple.updateTeacherInfo(teacherInfo,oldTeacherNumber);
+  public Integer updateTeacherInfo(TeacherInfo teacherInfo, String oldTeacherNumber) {
+    return stuAndTeacInfoMapperImple.updateTeacherInfo(teacherInfo, oldTeacherNumber);
   }
 
   /**
@@ -105,18 +105,44 @@ public class StuAndTeacController {
   @ResponseBody
   public String delStuInfo(
       @RequestParam(required = false) String stuNumber,
-      @RequestParam(required = false) String inSchoolYear
+      @RequestParam(required = false) String inSchoolYear,
+      @RequestParam(required = false) Integer id
   ) {
-    stuAndTeacInfoMapperImple.deleteStuInfo(stuNumber, inSchoolYear);
+    stuAndTeacInfoMapperImple.deleteStuInfo(stuNumber, inSchoolYear, id);
     return "1";
   }
 
   //删除老师信息
   @PostMapping("/delti")
   @ResponseBody
-  public String delTeacherInfo(@RequestParam(required = false) String teacherNumber) {
-    stuAndTeacInfoMapperImple.deleteTeacherInfo(teacherNumber);
+  public String delTeacherInfo(@RequestParam(required = false) String teacherNumber,
+      @RequestParam(required = false) Integer id) {
+    stuAndTeacInfoMapperImple.deleteTeacherInfo(teacherNumber, id);
     return "1";
   }
 
+
+  /**
+   * 文件上传权限
+   */
+
+  @PostMapping("/oifp")
+  @ResponseBody
+  public Integer openInfoFilePrivilege(Integer isOpen, Integer isTeacher) {
+    if (isTeacher == 0) {
+      return stuAndTeacInfoMapperImple.openTeacherInfoPrize(isOpen);
+    } else {
+      return stuAndTeacInfoMapperImple.openStuInfoPrize(isOpen);
+    }
+  }
+
+  /**
+   * 查询文件上传权限
+   * @return
+   */
+  @PostMapping("/qifp")
+  @ResponseBody
+  public String queryInfoFilePrivilege(){
+    return stuAndTeacInfoMapperImple.selectStuInfoPrize()+","+stuAndTeacInfoMapperImple.selectTeacherInfoPrize();
+  }
 }

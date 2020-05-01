@@ -2,6 +2,7 @@ package com.yzt.manager.stuinfo.pojo;
 
 public class StuInfo {
 
+  private Integer id=null;
   private String stuNumber=null;
   private String stuClass=null;
   private String name=null;
@@ -11,6 +12,14 @@ public class StuInfo {
   private Integer depart=null;
   private String phone=null;
   private String inSchoolYear=null;
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
   public void setDepart(Integer depart) {
     this.depart = depart;

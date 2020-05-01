@@ -2,6 +2,7 @@ package com.yzt.manager.stuinfo.pojo;
 
 public class TeacherInfo {
 
+  private Integer id=null;
   private String teacherNumber = null;
   private String teacherClass=null;
   private String name = null;
@@ -11,6 +12,14 @@ public class TeacherInfo {
   private Integer depart = null;
   private String phone = null;
   private String inSchoolYear=null;
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
   public String getInSchoolYear() {
     return inSchoolYear;
@@ -74,5 +83,20 @@ public class TeacherInfo {
 
   public void setPhone(String phone) {
     this.phone = phone;
+  }
+
+  @Override
+  public String toString() {
+    return "TeacherInfo{" +
+        "id=" + id +
+        ", teacherNumber='" + teacherNumber + '\'' +
+        ", teacherClass='" + teacherClass + '\'' +
+        ", name='" + name + '\'' +
+        ", password='" + password + '\'' +
+        ", college=" + college +
+        ", depart=" + depart +
+        ", phone='" + phone + '\'' +
+        ", inSchoolYear='" + inSchoolYear + '\'' +
+        '}';
   }
 }

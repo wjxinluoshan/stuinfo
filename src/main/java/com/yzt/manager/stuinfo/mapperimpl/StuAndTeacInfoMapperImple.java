@@ -16,13 +16,23 @@ public class StuAndTeacInfoMapperImple implements StuAndTeacInfoMapper {
   private StuAndTeacInfoMapper stuAndTeacInfoMapper;
 
   @Override
-  public Integer deleteStuInfo(String stuNumber, String inSchoolYear) {
-    return stuAndTeacInfoMapper.deleteStuInfo(stuNumber, inSchoolYear);
+  public Integer deleteStuInfo(String stuNumber, String inSchoolYear,Integer id) {
+    return stuAndTeacInfoMapper.deleteStuInfo(stuNumber, inSchoolYear,id);
   }
 
   @Override
-  public Integer deleteTeacherInfo(String teacherNumber) {
-    return stuAndTeacInfoMapper.deleteTeacherInfo(teacherNumber);
+  public Integer openStuInfoPrize(Integer tag) {
+    return stuAndTeacInfoMapper.openStuInfoPrize(tag);
+  }
+
+  @Override
+  public Integer deleteTeacherInfo(String teacherNumber,Integer id) {
+    return stuAndTeacInfoMapper.deleteTeacherInfo(teacherNumber,id);
+  }
+
+  @Override
+  public Integer openTeacherInfoPrize(Integer tag) {
+    return stuAndTeacInfoMapper.openTeacherInfoPrize(tag);
   }
 
   @Override
@@ -39,6 +49,7 @@ public class StuAndTeacInfoMapperImple implements StuAndTeacInfoMapper {
   public Integer updateStuInfo(StuInfo stuInfo, String oldStuNumber) {
     StuInfoCondition stuInfoCondition = new StuInfoCondition();
     stuInfoCondition.setStuNumber(stuInfo.getStuNumber());
+
     if (stuInfo.getStuNumber() == null || stuAndTeacInfoMapper.selectStu(stuInfoCondition)
         .isEmpty()) {
       return stuAndTeacInfoMapper.updateStuInfo(stuInfo, oldStuNumber);
@@ -60,7 +71,9 @@ public class StuAndTeacInfoMapperImple implements StuAndTeacInfoMapper {
   public Integer updateTeacherInfo(TeacherInfo teacherInfo, String oldTeacherNumber) {
     TeacherInfoCondition teacherInfoCondition = new TeacherInfoCondition();
     teacherInfoCondition.setTeacherNumber(teacherInfo.getTeacherNumber());
-    if (teacherInfo.getTeacherNumber() != null || stuAndTeacInfoMapper
+    System.out.println(stuAndTeacInfoMapper
+        .selectTeacher(teacherInfoCondition));
+    if (teacherInfo.getTeacherNumber() == null || stuAndTeacInfoMapper
         .selectTeacher(teacherInfoCondition).isEmpty()) {
       return stuAndTeacInfoMapper.updateTeacherInfo(teacherInfo, oldTeacherNumber);
     }
@@ -83,8 +96,8 @@ public class StuAndTeacInfoMapperImple implements StuAndTeacInfoMapper {
           if (isTeacher == 0) {
             TeacherInfo teacherInfo = new TeacherInfo();
             teacherInfo.setTeacherNumber(list.get(0));
-            teacherInfo.setName(list.get(1));
-            teacherInfo.setTeacherClass(list.get(2));
+            teacherInfo.setName(list.get(2));
+            teacherInfo.setTeacherClass(list.get(1));
             teacherInfo.setCollege(Integer.parseInt(list.get(3)));
             teacherInfo.setDepart(Integer.parseInt(list.get(4)));
             teacherInfo.setPhone(list.get(5));
@@ -140,6 +153,16 @@ public class StuAndTeacInfoMapperImple implements StuAndTeacInfoMapper {
         }
       }
     }
+  }
+
+  @Override
+  public Integer selectStuInfoPrize() {
+    return stuAndTeacInfoMapper.selectStuInfoPrize();
+  }
+
+  @Override
+  public Integer selectTeacherInfoPrize() {
+    return stuAndTeacInfoMapper.selectTeacherInfoPrize();
   }
 
 }

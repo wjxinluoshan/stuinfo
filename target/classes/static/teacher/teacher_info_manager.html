@@ -32,14 +32,14 @@
   <tr>
     <td>
       <div class="layui-input-inline">
-        <input type="text" v-model="inputUserNumber" placeholder="学生学号"
+        <input type="text" v-model="inputUserNumber" placeholder="教师号"
                autocomplete="off"
                class="layui-input">
       </div>
     </td>
     <td>
       <div class="layui-input-inline">
-        <input type="text" v-model="inputStuClass" placeholder="学生班级"
+        <input type="text" v-model="inputStuClass" placeholder="教师班级"
                autocomplete="off"
                class="layui-input">
       </div>
@@ -55,7 +55,7 @@
     </td>
     <td>
       <div class="layui-input-inline">
-        <input type="text" v-model="inputSchoolYear" placeholder="入学年线"
+        <input type="text" v-model="inputSchoolYear" placeholder="入教年线"
                autocomplete="off"
                class="layui-input">
       </div>
@@ -74,14 +74,14 @@
   <tr>
     <td>修改</td>
     <td>删除</td>
-    <td>学号</td>
+    <td>教师号</td>
     <td>班级</td>
     <td>姓名</td>
     <td>密码</td>
     <td>学院</td>
     <td>系</td>
     <td>手机号</td>
-    <td>入学年限</td>
+    <td>入教年限</td>
   </tr>
   </thead>
   <tr v-for="(stuNumber,index) in stuNumbers">
@@ -208,12 +208,12 @@
         //学生
         else if (type === 1) {
           let studentCondition = {};
-          //学生查询条件
+          //教师查询条件
           if (this.inputUserNumber.trim()) {
-            studentCondition.stuNumber = this.inputUserNumber.trim();
+            studentCondition.teacherNumber = this.inputUserNumber.trim();
           }
           if (this.inputStuClass.trim()) {
-            studentCondition.stuClass = this.inputStuClass.trim();
+            studentCondition.teacherClass = this.inputStuClass.trim();
           }
           if (this.inputDepart.trim()) {
             studentCondition.depart = this.inputDepart.trim();
@@ -225,7 +225,7 @@
             myAlert('请至少选择一个输入条件!!!');
             return;
           }
-          queryUserInfo('/stuinfo/sctc/qsis', studentCondition);
+          queryUserInfo('/stuinfo/sctc/qis', studentCondition);
         }
       }
     }
@@ -238,8 +238,8 @@
           if (response.length > 0) {
             let t1 = [], t2 = [], t3 = [], t4 = [], t5 = [], t6 = [], t7 = [], t8 = [], t9 = [];
             response.forEach((obj, index) => {
-              t1.push(obj.stuNumber);
-              t2.push(obj.stuClass);
+              t1.push(obj.teacherNumber);
+              t2.push(obj.teacherClass);
               t4.push(obj.password);
               t3.push(obj.name);
               //学院和系都是id
@@ -368,18 +368,18 @@
         //校验信息合法性
         let stuInfo = {};
         if (!$('#stuNumber' + index).val().trim()) {
-          myAlert('请输入学号!!!');
+          myAlert('请输入教师号!!!');
           return;
         }
         if ($('#stuNumber' + index).val().trim() !== this.stuNumbers[index]) {
-          stuInfo.stuNumber = $('#stuNumber' + index).val().trim();
+          stuInfo.teacherNumber = $('#stuNumber' + index).val().trim();
         }
 
         if (!$('#stuClass' + index).val().trim()) {
           myAlert('请输入班级!!!');
           return;
         }
-        stuInfo.stuClass = $('#stuClass' + index).val().trim();
+        stuInfo.teacherClass = $('#stuClass' + index).val().trim();
 
         if (!$('#name' + index).val().trim()) {
           myAlert('请输入姓名!!!');
@@ -429,11 +429,11 @@
          */
         console.log(stuInfo);
         let formData = new FormData();
-        formData.append('stuInfo', JSON.stringify(stuInfo));
-        formData.append('oldStuNumber', this.stuNumbers[index]);
+        formData.append('teacherInfo', JSON.stringify(stuInfo));
+        formData.append('oldTeacherNumber', this.stuNumbers[index]);
         $.ajax({
           method: 'post',
-          url: '/stuinfo/sctc/usi',
+          url: '/stuinfo/sctc/uti',
           data: formData,
           contentType: false,
           processData: false,
@@ -445,7 +445,7 @@
               table_info_id_vue.queryUserInfo(1);
               myAlert('修改成功!!!');
             } else {
-              myAlert('该学号已存在,修改失败!!!');
+              myAlert('该教师已存在,修改失败!!!');
             }
           }
         });
@@ -453,8 +453,8 @@
       },
       del(index) {
         //得到当前操作的id
-        if (confirm('确认删除学生学号为:' + this.stuNumbers[index] + " 的学生?")) {
-          $.post('/stuinfo/sctc/delsi', {id: this.ids[index]}, function (response) {
+        if (confirm('确认删除教师号为:' + this.stuNumbers[index] + " 的教师?")) {
+          $.post('/stuinfo/sctc/delti', {id: this.ids[index]}, function (response) {
             if (response) {
               myAlert('删除成功!!!');
               //重新查询数据
@@ -555,7 +555,6 @@
               outerDepartInDeparts[index] = tempDeparts;
               departInDepartsDependCollegeIds[index] = tempDependCollegeIds;
               departInDepartsIds[index] = tempDepartIds;
-              console.log(outerDepartInDeparts[index]);
               table_info_show_id_vue.departInDeparts = [];
               table_info_show_id_vue.departInDeparts = outerDepartInDeparts;
             }
