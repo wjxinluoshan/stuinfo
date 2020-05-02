@@ -7,22 +7,134 @@
   <script src="/stuinfo/layui/layui.js"></script>
   <script src="/stuinfo/js/vue.js"></script>
   <script src="/stuinfo/js/jquery.min.js"></script>
+  <style>
+    td {
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
 <table class="layui-table" lay-skin="line" id="table_info_id">
+  <thead>
   <tr>
-    <td>上传获奖文件</td>
+    <td>类型</td>
+    <td>选择</td>
+    <td>上传</td>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>上传获奖文件(图片、.doc、.docx)</td>
     <td>
-      <input type="file" accept="image/*,.doc,.docx" id="input_file_id"/>
-      <button class="layui-btn layui-btn-radius layui-btn-primary" id="btn_upload_id" disabled>上传
+      <input type="file" accept="image/*,.doc,.docx" @change="choiceFiles" multiple id="0"/>
+    </td>
+    <td>
+      <button class="layui-btn layui-btn-radius layui-btn-primary" id="btn_upload_id" disabled
+              @click="uploadClick(0)">上传
       </button>
     </td>
   </tr>
+  <tr>
+    <td>
+      个人简介(.doc、.docx)
+    </td>
+    <td>
+      <input type="file" accept=".doc,.docx" @change="choiceFiles" multiple id="1"/>
+    </td>
+    <td>
+      <button class="layui-btn layui-btn-radius layui-btn-primary" id="btn_production_upload_id"
+              @click="uploadClick(1)">上传
+      </button>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      成绩(图片、.doc、.docx)
+    </td>
+    <td>
+      <input type="file" accept="image/*,.doc,.docx" @change="choiceFiles" multiple id="2"/>
+    </td>
+    <td>
+      <button class="layui-btn layui-btn-radius layui-btn-primary" id="btn_grade_upload_id"
+              @click="uploadClick(2)">上传
+      </button>
+    </td>
+  </tr>
+
+  <!--
+     压缩包形式
+  -->
+  <tr>
+    <td>
+      实习经历(.zip)
+    </td>
+    <td>
+      <input type="file" accept=".zip" multiple @change="choiceFiles" id="3"/>
+    </td>
+    <td>
+      <button class="layui-btn layui-btn-radius layui-btn-primary" id="btn_practice_upload_id"
+              @click="uploadClick(3)">上传
+      </button>
+    </td>
+  </tr>
+  </tbody>
+
 </table>
 
+<table class="layui-table" lay-skin="line" id="table_show_upload_id">
+
+  <thead>
+  <th style="text-align: center">下载</th>
+  <th style="text-align: center">{{filename}}</th>
+  <th style="text-align: center">上传时间</th>
+  </thead>
+  <tbody>
+  <tr v-for="(filename,index) in fileNames">
+    <td>
+      <button @click="download(index)" class="layui-btn layui-btn-radius layui-btn-danger">
+        下载
+      </button>
+    </td>
+    <td>
+      <label>{{fileNames[index]}}</label>
+    </td>
+    <td>
+      <label>{{uploadTimes[index]}}</label>
+    </td>
+  </tr>
+  </tbody>
+</table>
 
 </body>
 <script>
+
+
+  var id = window.location.href.split('=')[1];
+
+  //注意：导航 依赖 element 模块，否则无法进行功能性操作
+  layui.use('element', function () {
+    var element = layui.element;
+
+    //…
+  });
+
+  var layer;
+  layui.use('layer', function () {
+    layer = layui.layer;
+  });
+
+  function myAlert(content) {
+    layer.open({
+      title: '提示'
+      , content: content
+    });
+  }
+
+  /**
+   * 选择文件的监听事件
+   */
+  var uploadFiles = ['', '', '', ''];
   /**
    * 检测上传获奖文件是否有权限
    */
@@ -38,5 +150,126 @@
       }
     }
   });
+
+  var table_info_id_vue = new Vue({
+    el: "#table_info_id",
+    data: {},
+    methods: {
+      choiceFiles(event) {
+        uploadFiles[event.target.id] = event.target.files;
+      },
+      uploadClick(index) {
+        function inner(index) {
+          let formData = new FormData();
+          if (uploadFiles[index]) {
+            for (let i = 0; i < uploadFiles[index].length; i++) {
+              formData.append('multipartFiles', uploadFiles[index][i]);
+            }
+          } else {
+            myAlert('请选择文件');
+            return;
+          }
+          formData.append('id', id);
+          formData.append('isTeacher', "1");
+          formData.append('stuUploadType', index + '');
+          uploadFile(formData, index);
+        }
+
+        let formData = new FormData();
+        switch (index) {
+            //获奖经历
+          case 0:
+            inner(0);
+            break;
+            //个人简介
+          case 1:
+            inner(1);
+            break;
+            //成绩
+          case 2:
+            inner(2);
+            break;
+            //实习经历
+          case 3:
+            inner(3);
+            break;
+        }
+      }
+    }
+  });
+
+  function uploadFile(formData, fileType) {
+    console.log('uploadFile...');
+    $.ajax({
+      type: "POST",
+      url: '/stuinfo/stfc/uf',
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        if (response) {
+
+          let formData = new FormData();
+          formData.append('id', id);
+          formData.append('isTeacher', '1');
+          formData.append('stuUploadType', fileType + '');
+          queryFilesUrl(formData);
+          myAlert('上传成功!!!');
+        } else {
+          myAlert('上传失败!!!');
+        }
+      },
+      error: function (e) {
+        myAlert('上传失败!!!');
+      }
+    });
+  }
+
+  function queryFilesUrl(formData) {
+    $.ajax({
+      type: "POST",
+      url: '/stuinfo/stfc/qfu',
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        if (response) {
+          if (response.length > 0) {
+            table_show_upload_id_vue.fileUrls = response;
+            let fileNames = [];
+            let uploadTimes = [];
+            for (let x of response) {
+              fileNames.push(x.split('filename=')[1]);
+              uploadTimes.push(x.split('&long=')[0].split('data=')[1]);
+            }
+            table_show_upload_id_vue.fileNames = fileNames;
+            table_show_upload_id_vue.uploadTimes = uploadTimes;
+          }
+        }
+      },
+      error: function (e) {
+      }
+    });
+  }
+
+  var table_show_upload_id_vue = new Vue({
+    el: '#table_show_upload_id',
+    data: {
+      filename:'文件名',
+      uploadTimes: [],
+      fileNames: [],
+      fileUrls: []
+    },
+    methods: {
+      download(index) {
+        let a = document.createElement('a');
+        a.download = this.fileNames[index];
+        a.href = this.fileUrls[index];
+        a.click();
+      }
+    }
+  })
+
+
 </script>
 </html>

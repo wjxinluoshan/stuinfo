@@ -3,8 +3,188 @@
 <head>
   <meta charset="UTF-8">
   <title>学生我的页面</title>
+  <link rel="stylesheet" href="/stuinfo/layui/css/layui.css">
+  <script src="/stuinfo/layui/layui.js"></script>
+  <script src="/stuinfo/js/vue.js"></script>
+  <script src="/stuinfo/js/jquery.min.js"></script>
+  <style>
+    td {
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
+<table class="layui-table" lay-skin="line" id="table_info_id">
+  <thead>
+  <th style="text-align: center">获奖文件</th>
+  <th style="text-align: center">个人简介</th>
+  <th style="text-align: center">成绩</th>
+  <th style="text-align: center">实习经历</th>
+  </thead>
+  <tr>
+    <td>
+      <button disabled id="btn_upload_id" @click="queryFile(0)"
+              class="layui-btn layui-btn-radius layui-btn-primary"
+      >查询
+      </button>
+    </td>
+    <td>
+      <button @click="queryFile(1)" class="layui-btn layui-btn-radius layui-btn-primary"
+      >查询
+      </button>
+    </td>
+    <td>
+      <button @click="queryFile(2)" class="layui-btn layui-btn-radius layui-btn-primary"
+      >查询
+      </button>
+    </td>
+    <td>
+      <button @click="queryFile(3)" class="layui-btn layui-btn-radius layui-btn-primary"
+      >查询
+      </button>
+    </td>
+  </tr>
+</table>
 
+<table class="layui-table" lay-skin="line" id="table_show_upload_id">
+  <tr>
+    <td v-if="fileNames.length>0" style="color: indianred">{{showFileType}}</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <thead>
+  <th style="text-align: center">下载</th>
+  <th style="text-align: center">{{filename}}</th>
+  <th style="text-align: center">上传时间</th>
+  </thead>
+  <tbody>
+
+  <tr v-for="(filename,index) in fileNames">
+    <td>
+      <button @click="download(index)" class="layui-btn layui-btn-radius layui-btn-danger">
+        下载
+      </button>
+    </td>
+    <td>
+      <label>{{fileNames[index]}}</label>
+    </td>
+    <td>
+      <label>{{uploadTimes[index]}}</label>
+    </td>
+  </tr>
+  </tbody>
+</table>
 </body>
+<script>
+  var id = window.location.href.split('=')[1];
+
+  //注意：导航 依赖 element 模块，否则无法进行功能性操作
+  layui.use('element', function () {
+    var element = layui.element;
+
+    //…
+  });
+
+  var layer;
+  layui.use('layer', function () {
+    layer = layui.layer;
+  });
+
+  function myAlert(content) {
+    layer.open({
+      title: '提示'
+      , content: content
+    });
+  }
+
+  /**
+   * 检测上传获奖文件是否有权限
+   */
+  $.post('/stuinfo/sctc/qifp', function (response) {
+    if (response) {
+      //0就是关闭
+      if (response.split(',')[0] == 1) {
+        $('#btn_upload_id').removeAttr('disable');
+      } else {
+        $('#btn_upload_id').html('暂未开启，不可操作')
+      }
+    }
+  });
+
+  var table_info_id_vue = new Vue({
+    el: '#table_info_id',
+    data: {},
+    methods: {
+      queryFile(index) {
+        let formData = new FormData();
+        formData.append('id', id);
+        formData.append('isTeacher', '1');
+        formData.append('stuUploadType', index + '');
+        queryFilesUrl(formData, index);
+      }
+    }
+  });
+
+  function queryFilesUrl(formData, index) {
+    $.ajax({
+      type: "POST",
+      url: '/stuinfo/stfc/qfu',
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        if (response) {
+          if (response.length > 0) {
+            table_show_upload_id_vue.fileUrls = response;
+            let fileNames = [];
+            let uploadTimes = [];
+            for (let x of response) {
+              fileNames.push(x.split('filename=')[1]);
+              uploadTimes.push(x.split('&long=')[0].split('data=')[1]);
+            }
+            table_show_upload_id_vue.fileNames = fileNames;
+            table_show_upload_id_vue.uploadTimes = uploadTimes;
+            switch (index) {
+              case 0:
+                table_show_upload_id_vue.showFileType = '获奖文件';
+                break;
+              case 1:
+                table_show_upload_id_vue.showFileType = '个人简介';
+                break;
+              case 2:
+                table_show_upload_id_vue.showFileType = '成绩';
+                break;
+              case 3:
+                table_show_upload_id_vue.showFileType = '实习经历';
+                break;
+            }
+          } else {
+            myAlert('未查询到任何数据!!!');
+          }
+        }
+      },
+      error: function (e) {
+      }
+    });
+  }
+
+  var table_show_upload_id_vue = new Vue({
+    el: '#table_show_upload_id',
+    data: {
+      showFileType: '',
+      filename: '文件名',
+      uploadTimes: [],
+      fileNames: [],
+      fileUrls: []
+    },
+    methods: {
+      download(index) {
+        let a = document.createElement('a');
+        a.download = this.fileNames[index];
+        a.href = this.fileUrls[index];
+        a.click();
+      }
+    }
+  })
+</script>
 </html>

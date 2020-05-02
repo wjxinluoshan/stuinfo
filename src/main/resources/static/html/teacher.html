@@ -90,9 +90,9 @@
   /**
    * 跳转到上传页面
    */
-  jumpPageToIframe('a_upload', '/stuinfo/teacher/upload.html');
+  jumpPageToIframe('a_upload', '/stuinfo/teacher/upload.html?data='+id);
   //跳转到我的管理页面
-  jumpPageToIframe('a_mine', '/stuinfo/teacher/mine.html');
+  jumpPageToIframe('a_mine', '/stuinfo/teacher/mine.html?data='+id);
 
   function myAlert(content) {
     layer.open({

@@ -9,6 +9,7 @@ import com.yzt.manager.stuinfo.pojo.StuInfoCondition;
 import com.yzt.manager.stuinfo.pojo.TeacherInfo;
 import com.yzt.manager.stuinfo.pojo.TeacherInfoCondition;
 import com.yzt.manager.stuinfo.tool.FileTool;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,8 +108,9 @@ public class StuAndTeacController {
       @RequestParam(required = false) String stuNumber,
       @RequestParam(required = false) String inSchoolYear,
       @RequestParam(required = false) Integer id
-  ) {
+  ) throws IOException {
     stuAndTeacInfoMapperImple.deleteStuInfo(stuNumber, inSchoolYear, id);
+    fileTool.delFilesUrl(id,1,null,null);
     return "1";
   }
 
@@ -116,8 +118,9 @@ public class StuAndTeacController {
   @PostMapping("/delti")
   @ResponseBody
   public String delTeacherInfo(@RequestParam(required = false) String teacherNumber,
-      @RequestParam(required = false) Integer id) {
+      @RequestParam(required = false) Integer id) throws IOException {
     stuAndTeacInfoMapperImple.deleteTeacherInfo(teacherNumber, id);
+   // fileTool.delFilesUrl(id,0,null,null);
     return "1";
   }
 

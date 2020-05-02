@@ -267,6 +267,7 @@
             }
             ;
           } else {
+            table_info_show_id_vue.stuNumbers = [];
             myAlert('没有满足以上条件的数据!!!')
           }
           return;
@@ -376,10 +377,8 @@
         }
 
         if (!$('#stuClass' + index).val().trim()) {
-          myAlert('请输入班级!!!');
-          return;
+          stuInfo.teacherClass = $('#stuClass' + index).val().trim();
         }
-        stuInfo.teacherClass = $('#stuClass' + index).val().trim();
 
         if (!$('#name' + index).val().trim()) {
           myAlert('请输入姓名!!!');
@@ -439,7 +438,8 @@
           processData: false,
           success: function (response) {
             if (response) {
-              if ($('#stuNumber' + index).val().trim() !== table_info_show_id_vue.stuNumbers[index]) {
+              if ($('#stuNumber' + index).val().trim()
+                  !== table_info_show_id_vue.stuNumbers[index]) {
                 table_info_show_id_vue.stuNumbers[index] = $('#stuNumber' + index).val().trim();
               }
               table_info_id_vue.queryUserInfo(1);
