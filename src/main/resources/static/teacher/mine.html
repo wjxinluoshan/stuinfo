@@ -23,7 +23,7 @@
   </thead>
   <tr>
     <td>
-      <button disabled id="btn_upload_id" @click="queryFile(0)"
+      <button  id="btn_upload_id" @click="queryFile(0)"
               class="layui-btn layui-btn-radius layui-btn-primary"
       >查询
       </button>
@@ -100,16 +100,16 @@
   /**
    * 检测上传获奖文件是否有权限
    */
-  $.post('/stuinfo/sctc/qifp', function (response) {
-    if (response) {
-      //0就是关闭
-      if (response.split(',')[1] == 1) {
-        $('#btn_upload_id').removeAttr('disable');
-      } else {
-        $('#btn_upload_id').html('暂未开启，不可操作')
-      }
-    }
-  });
+  // $.post('/stuinfo/sctc/qifp', function (response) {
+  //   if (response) {
+  //     //0就是关闭
+  //     if (response.split(',')[1] == 1) {
+  //       $('#btn_upload_id').removeAttr('disable');
+  //     } else {
+  //       $('#btn_upload_id').html('暂未开启，不可操作')
+  //     }
+  //   }
+  // });
 
   var table_info_id_vue = new Vue({
     el: '#table_info_id',

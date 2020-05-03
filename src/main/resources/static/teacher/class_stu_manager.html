@@ -24,41 +24,19 @@
   <tbody>
   <tr>
     <td>查询条件</td>
+    <td>您所在班级：{{teacherClass}}</td>
+  </tr>
+  <tr>
     <td>
+      <div class="layui-input-inline">
+        <input type="text" v-model="inputUserNumber" placeholder="学生学号"
+               autocomplete="off"
+               class="layui-input">
+      </div>
       <button class="layui-btn layui-btn-radius layui-btn-primary" @click="queryUserInfo(1)">查询
       </button>
     </td>
-  </tr>
-  <tr>
     <td>
-      <div class="layui-input-inline">
-        <input type="text" v-model="inputUserNumber" placeholder="教师号"
-               autocomplete="off"
-               class="layui-input">
-      </div>
-    </td>
-    <td>
-      <div class="layui-input-inline">
-        <input type="text" v-model="inputStuClass" placeholder="教师班级"
-               autocomplete="off"
-               class="layui-input">
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <div class="layui-input-inline">
-        <input type="text" v-model="inputDepart" placeholder="所在系"
-               autocomplete="off"
-               class="layui-input">
-      </div>
-    </td>
-    <td>
-      <div class="layui-input-inline">
-        <input type="text" v-model="inputSchoolYear" placeholder="入教年线"
-               autocomplete="off"
-               class="layui-input">
-      </div>
     </td>
   </tr>
   </tbody>
@@ -72,96 +50,41 @@
   <tr>查询结果显示区域</tr>
   <thead>
   <tr>
-    <th style="text-align: center">修改</th>
-    <th style="text-align: center">删除</th>
-    <th style="text-align: center">教师号</th>
+    <th style="text-align: center">学号</th>
     <th style="text-align: center">班级</th>
     <th style="text-align: center">姓名</th>
     <th style="text-align: center">密码</th>
     <th style="text-align: center">学院</th>
     <th style="text-align: center">系</th>
     <th style="text-align: center">手机号</th>
-    <th style="text-align: center">入教年限</th>
+    <th style="text-align: center">入学年限</th>
   </tr>
   </thead>
   <tr v-for="(stuNumber,index) in stuNumbers">
     <td>
-      <button @click="edit(index)" class="layui-btn layui-btn-radius">修改</button>
+      <label class="layui-form-label">{{stuNumber}}</label>
     </td>
     <td>
-      <button @click="del(index)" class="layui-btn layui-btn-radius layui-btn-danger">删除</button>
+      <label class="layui-form-label">{{stuClasses[index]}}</label>
     </td>
     <td>
-      <div class="layui-input-inline" style=" width: 190px">
-        <input type="text" :value="stuNumber" :id="'stuNumber'+index"
-               autocomplete="off"
-               class="layui-input">
+      <label class="layui-form-label">{{names[index]}}</label>
+    </td>
+    <td>
+      <label class="layui-form-label">{{passwords[index]}}</label>
+    </td>
+    <td>
+      <label class="layui-form-label">{{colleges[index]}}</label>
+    </td>
+    <td>
+      <label class="layui-form-label">{{departs[index]}}</label>
       </div>
     </td>
     <td>
-      <div class="layui-input-inline" style=" width: 190px">
-        <input type="text" :value="stuClasses[index]" :id="'stuClass'+index"
-               autocomplete="off"
-               class="layui-input">
-      </div>
+      <label class="layui-form-label">{{phones[index]}}</label>
     </td>
     <td>
-      <div class="layui-input-inline" style=" width: 190px">
-        <input type="text" :value="names[index]" :id="'name'+index"
-               autocomplete="off"
-               class="layui-input">
-      </div>
-    </td>
-    <td>
-      <div class="layui-input-inline" style=" width: 190px">
-        <input type="text" :value="passwords[index]" :id="'password'+index"
-               autocomplete="off"
-               class="layui-input">
-      </div>
-    </td>
-    <td>
-      <div class="layui-form layui-input-inline" style=" min-width: 190px">
-        <div class="layui-form-item">
-          <label class="layui-form-label">{{colleges[index]}}</label></br>
-          <div class="layui-input-inline">
-            <select :lay-filter="'college'+index" :id="'change_college_id'+index">
-              <option value="">请选择一个学院</option>
-              <option v-for="(college,i) in collegeInColleges[index]"
-                      :value="college">{{college}}
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div class="layui-form layui-input-inline" style=" min-width: 190px">
-        <div class="layui-form-item">
-          <label class="layui-form-label">{{departs[index]}}</label></br>
-          <div class="layui-input-inline">
-            <select :lay-filter="'depart'+index" :id="'change_depart_id'+index">
-              <option value="">请选择一个系</option>
-              <option v-for="(depart,i) in departInDeparts[index]"
-                      :value="depart" v-if="depart!=departs[index]">{{depart}}
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div class="layui-input-inline" style=" width: 190px">
-        <input type="text" :value="phones[index]" :id="'phone'+index"
-               autocomplete="off"
-               class="layui-input">
-      </div>
-    </td>
-    <td>
-      <div class="layui-input-inline" style=" width: 190px">
-        <input type="text" :value="inSchoolYears[index]" :id="'inSchoolYear'+index"
-               autocomplete="off"
-               class="layui-input">
-      </div>
+      <label class="layui-form-label">{{inSchoolYears[index]}}</label>
     </td>
   </tr>
   <!--  <tr>-->
@@ -172,6 +95,71 @@
   <tbody>
   </tbody>
 </table>
+
+<table id="table_file_info_id" class="layui-table" lay-skin="line">
+  <thead>
+  <th style="text-align: center">获奖文件</th>
+  <th style="text-align: center">个人简介</th>
+  <th style="text-align: center">成绩</th>
+  <th style="text-align: center">实习经历</th>
+  </thead>
+  <tbody>
+  <tr>
+    <td>
+      <div class="layui-input-inline">
+        <input type="text" v-model="inputUserNumber" placeholder="学生学号"
+               autocomplete="off"
+               class="layui-input">
+      </div>
+    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>
+      <button @click="queryFile(0)" class="layui-btn layui-btn-radius">查询</button>
+    </td>
+    <td>
+      <button @click="queryFile(1)" class="layui-btn layui-btn-radius">查询</button>
+    </td>
+    <td>
+      <button @click="queryFile(2)" class="layui-btn layui-btn-radius">查询</button>
+    </td>
+    <td>
+      <button @click="queryFile(3)" class="layui-btn layui-btn-radius">查询</button>
+    </td>
+  </tr>
+  <tr>
+    <td style="color: indianred">{{showFileType}}</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr v-for="(filename , index) in fileNames">
+    <td>
+      <button @click="download(index)" class="layui-btn layui-btn-radius layui-btn-primary"
+      > 下载
+      </button>
+    </td>
+    <td>
+      <button @click="del(index)" class="layui-btn layui-btn-radius layui-btn-danger"
+      >删除
+      </button>
+    </td>
+
+    <td>
+      <label>{{fileNames[index]}}</label>
+    </td>
+    <td>
+      <label>{{uploadTimes[index]}}</label>
+    </td>
+
+  </tr>
+  </tbody>
+
+</table>
+
 </body>
 <script src="/stuinfo/js/requestSchoolInfo.js"></script>
 <script src="/stuinfo/js/json2.js"></script>
@@ -182,6 +170,11 @@
 
     //…
   });
+  var layer;
+  layui.use('layer', function () {
+    layer = layui.layer;
+  });
+  var teacherClass = window.location.href.split('=')[1];
 
 </script>
 <script>
@@ -192,44 +185,27 @@
        *查询条件
        */
       inputUserNumber: '',
-      inputStuClass: '',
-      inputDepart: '',
-      inputSchoolYear: '',
+      inputStuClass: teacherClass,
+
+      teacherClass: '',
     },
     methods: {
       /**
        * 信息查询
        */
       queryUserInfo(type) {
-        //老师
-        if (type === 0) {
+        let studentCondition = {stuClass: teacherClass};
+        //学生查询条件
+        if (this.inputUserNumber.trim()) {
+          studentCondition.stuNumber = this.inputUserNumber.trim();
+        }
+        queryUserInfo('/stuinfo/sctc/qsis', studentCondition);
 
-        }
-        //学生
-        else if (type === 1) {
-          let studentCondition = {};
-          //教师查询条件
-          if (this.inputUserNumber.trim()) {
-            studentCondition.teacherNumber = this.inputUserNumber.trim();
-          }
-          if (this.inputStuClass.trim()) {
-            studentCondition.teacherClass = this.inputStuClass.trim();
-          }
-          if (this.inputDepart.trim()) {
-            studentCondition.depart = this.inputDepart.trim();
-          }
-          if (this.inputSchoolYear.trim()) {
-            studentCondition.inSchoolYear = this.inputSchoolYear.trim();
-          }
-          if (Object.keys(studentCondition).length === 0) {
-            myAlert('请至少选择一个输入条件!!!');
-            return;
-          }
-          queryUserInfo('/stuinfo/sctc/qis', studentCondition);
-        }
       }
     }
   });
+
+  table_info_id_vue.teacherClass = teacherClass;
 
   function queryUserInfo(url, data) {
     $.post(url, data, function (response) {
@@ -238,8 +214,8 @@
           if (response.length > 0) {
             let t1 = [], t2 = [], t3 = [], t4 = [], t5 = [], t6 = [], t7 = [], t8 = [], t9 = [];
             response.forEach((obj, index) => {
-              t1.push(obj.teacherNumber);
-              t2.push(obj.teacherClass);
+              t1.push(obj.stuNumber);
+              t2.push(obj.stuClass);
               t4.push(obj.password);
               t3.push(obj.name);
               //学院和系都是id
@@ -369,16 +345,18 @@
         //校验信息合法性
         let stuInfo = {};
         if (!$('#stuNumber' + index).val().trim()) {
-          myAlert('请输入教师号!!!');
+          myAlert('请输入学号!!!');
           return;
         }
         if ($('#stuNumber' + index).val().trim() !== this.stuNumbers[index]) {
-          stuInfo.teacherNumber = $('#stuNumber' + index).val().trim();
+          stuInfo.stuNumber = $('#stuNumber' + index).val().trim();
         }
 
         if (!$('#stuClass' + index).val().trim()) {
-          stuInfo.teacherClass = $('#stuClass' + index).val().trim();
+          myAlert('请输入班级!!!');
+          return;
         }
+        stuInfo.stuClass = $('#stuClass' + index).val().trim();
 
         if (!$('#name' + index).val().trim()) {
           myAlert('请输入姓名!!!');
@@ -428,11 +406,11 @@
          */
         console.log(stuInfo);
         let formData = new FormData();
-        formData.append('teacherInfo', JSON.stringify(stuInfo));
-        formData.append('oldTeacherNumber', this.stuNumbers[index]);
+        formData.append('stuInfo', JSON.stringify(stuInfo));
+        formData.append('oldStuNumber', this.stuNumbers[index]);
         $.ajax({
           method: 'post',
-          url: '/stuinfo/sctc/uti',
+          url: '/stuinfo/sctc/usi',
           data: formData,
           contentType: false,
           processData: false,
@@ -445,7 +423,7 @@
               table_info_id_vue.queryUserInfo(1);
               myAlert('修改成功!!!');
             } else {
-              myAlert('该教师已存在,修改失败!!!');
+              myAlert('该学号已存在,修改失败!!!');
             }
           }
         });
@@ -453,8 +431,8 @@
       },
       del(index) {
         //得到当前操作的id
-        if (confirm('确认删除教师号为:' + this.stuNumbers[index] + " 的教师?")) {
-          $.post('/stuinfo/sctc/delti', {id: this.ids[index]}, function (response) {
+        if (confirm('确认删除学生学号为:' + this.stuNumbers[index] + " 的学生?")) {
+          $.post('/stuinfo/sctc/delsi', {id: this.ids[index]}, function (response) {
             if (response) {
               myAlert('删除成功!!!');
               //重新查询数据
@@ -555,6 +533,7 @@
               outerDepartInDeparts[index] = tempDeparts;
               departInDepartsDependCollegeIds[index] = tempDependCollegeIds;
               departInDepartsIds[index] = tempDepartIds;
+              console.log(outerDepartInDeparts[index]);
               table_info_show_id_vue.departInDeparts = [];
               table_info_show_id_vue.departInDeparts = outerDepartInDeparts;
             }
@@ -594,6 +573,132 @@
     });
   }
 
+  var stuId = '';
+  var fileType = '';
+  var table_show_upload_id_vue = new Vue({
+    el: '#table_file_info_id',
+    data: {
+      fileNames: [],
+      fileUrls: [],
+      uploadTimes: [],
+      inputUserNumber: '',
+      showFileType: ''
+    },
+    methods: {
+      queryFile(index) {
+        if (this.inputUserNumber.trim()) {
+          $.post('/stuinfo/sctc/qsis', {stuNumber: this.inputUserNumber.trim()},
+              function (response) {
+                if (response && response.length > 0) {
+                  if (teacherClass == response[0].stuClass) {
+                    fileType = index;
+                    stuId = response[0].id;
+                    let formData = new FormData();
+                    formData.append('id', response[0].id);
+                    formData.append('isTeacher', '1');
+                    formData.append('stuUploadType', index + '');
+                    queryFilesUrl(formData, index);
+                  } else {
+                    myAlert('该学生不是您班的!!!');
+                  }
+                }
+              })
+        } else {
+          myAlert('输入学生学号!!!');
+        }
+
+      },
+      download(index) {
+        let a = document.createElement('a');
+        a.download = this.fileNames[index];
+        a.href = this.fileUrls[index];
+        a.click();
+      },
+      del(index) {
+        if (stuId && fileType) {
+          if (confirm('确认删除文件:' + this.fileNames[index] + ' ?')) {
+            $.post('/stuinfo/stfc/df', {
+              id: stuId,
+              isTeacher: 1,
+              fileType: fileType,
+              url: this.fileUrls[index]
+            }, function (response) {
+              let tempArr = [[],[],[]];
+              function inner(arr, index,tempArrIndex) {
+                arr.forEach((value, i) => {
+                  if (i !== index) {
+                    tempArr[tempArrIndex].push(value);
+                  }
+                })
+              }
+
+              inner(table_show_upload_id_vue.fileUrls,index,0);
+              inner(table_show_upload_id_vue.fileNames,index,1);
+              inner(table_show_upload_id_vue.uploadTimes,index,2);
+
+              table_show_upload_id_vue.fileNames = [];
+              table_show_upload_id_vue.uploadTimes = [];
+              table_show_upload_id_vue.fileUrls = [];
+
+              table_show_upload_id_vue.fileNames = tempArr[1];
+              table_show_upload_id_vue.fileUrls = tempArr[0];
+              table_show_upload_id_vue.uploadTimes = tempArr[2];
+              if (table_show_upload_id_vue.fileUrls.length == 0) {
+                table_show_upload_id_vue.showFileType = '';
+              }
+            })
+          }
+        }
+      }
+    }
+  });
+
+  function queryFilesUrl(formData, index) {
+    $.ajax({
+      type: "POST",
+      url: '/stuinfo/stfc/qfu',
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        if (response) {
+          if (response.length > 0) {
+            table_show_upload_id_vue.fileUrls = response;
+            let fileNames = [];
+            let uploadTimes = [];
+            for (let x of response) {
+              fileNames.push(x.split('filename=')[1]);
+              uploadTimes.push(x.split('&long=')[0].split('data=')[1]);
+            }
+            table_show_upload_id_vue.fileNames = fileNames;
+            table_show_upload_id_vue.uploadTimes = uploadTimes;
+            switch (index) {
+              case 0:
+                table_show_upload_id_vue.showFileType = '获奖文件';
+                break;
+              case 1:
+                table_show_upload_id_vue.showFileType = '个人简介';
+                break;
+              case 2:
+                table_show_upload_id_vue.showFileType = '成绩';
+                break;
+              case 3:
+                table_show_upload_id_vue.showFileType = '实习经历';
+                break;
+            }
+          } else {
+            table_show_upload_id_vue.fileNames = [];
+            table_show_upload_id_vue.uploadTimes = [];
+            table_show_upload_id_vue.fileUrls = [];
+            table_show_upload_id_vue.showFileType='';
+            myAlert('未查询到任何数据!!!');
+          }
+        }
+      },
+      error: function (e) {
+      }
+    });
+  }
 </script>
 
 </html>

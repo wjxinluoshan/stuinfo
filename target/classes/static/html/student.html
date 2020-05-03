@@ -27,54 +27,54 @@
   var layer;
   layui.use('layer', function () {
     layer = layui.layer;
+    /**
+     * 检查密码，如果密码为123456，则提示学生修改密码
+     */
+    $.post('/stuinfo/sctc/qsis', {id: id}, function (response) {
+      console.log(response)
+      if (response) {
+        try {
+          if (response[0].password === '123456') {
+            layer.prompt({
+              formType: 2,
+              value: '123456',
+              title: '请输入新密码(前后空格无效)',
+              area: ['300px', '50px'] //自定义文本域宽高
+            }, function (value, index, elem) {
+              if (value.trim()) {
+                let formData = new FormData();
+                formData.append('stuInfo', JSON.stringify({password: value.trim()}));
+                formData.append('oldStuNumber', response[0].stuNumber);
+                $.ajax({
+                  method: 'post',
+                  url: '/stuinfo/sctc/usi',
+                  data: formData,
+                  contentType: false,
+                  processData: false,
+                  success: function (response) {
+                    if (response) {
+                      myAlert('密码修改成功!!!');
+                    } else {
+                      myAlert('密码修改失败!!!');
+                    }
+                  }
+                });
+              }
+              layer.close(index);
+            });
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      }
+
+    });
   });
 </script>
 </body>
 <script>
   //根据url解析出id
   var id = window.location.href.split('=')[1];
-  /**
-   * 检查密码，如果密码为123456，则提示学生修改密码
-   */
-  $.post('/stuinfo/sctc/qsis', {id: id}, function (response) {
-    console.log(response)
-    if (response) {
-      try {
-        if (response[0].password === '123456') {
-          layer.prompt({
-            formType: 2,
-            value: '123456',
-            title: '请输入新密码(前后空格无效)',
-            area: ['300px', '50px'] //自定义文本域宽高
-          }, function (value, index, elem) {
-            if (value.trim()) {
-              let formData = new FormData();
-              formData.append('stuInfo', JSON.stringify({password: value.trim()}));
-              formData.append('oldStuNumber', response[0].stuNumber);
-              $.ajax({
-                method: 'post',
-                url: '/stuinfo/sctc/usi',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function (response) {
-                  if (response) {
-                    myAlert('密码修改成功!!!');
-                  } else {
-                    myAlert('密码修改失败!!!');
-                  }
-                }
-              });
-            }
-            layer.close(index);
-          });
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    }
-
-  });
 
   $('#iframe_id').css('height', window.innerHeight - $('#nav_id').height() + 'px');
 
@@ -90,9 +90,9 @@
   /**
    * 跳转到上传页面
    */
-  jumpPageToIframe('a_upload', '/stuinfo/student/upload.html?data='+id);
+  jumpPageToIframe('a_upload', '/stuinfo/student/upload.html?data=' + id);
   //跳转到我的管理页面
-  jumpPageToIframe('a_mine', '/stuinfo/student/mine.html?data='+id);
+  jumpPageToIframe('a_mine', '/stuinfo/student/mine.html?data=' + id);
 
   function myAlert(content) {
     layer.open({

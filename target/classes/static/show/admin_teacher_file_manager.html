@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>教师信息管理</title>
+  <link rel="stylesheet" href="/stuinfo/layui/css/layui.css">
+  <script src="/stuinfo/layui/layui.js"></script>
+  <script src="/stuinfo/js/vue.js"></script>
+  <script src="/stuinfo/js/jquery.min.js"></script>
+  <style>
+    td {
+      text-align: center;
+      width: 190px
+    }
+  </style>
+</head>
+<body>
+
+<table id="table_file_info_id" class="layui-table" lay-skin="line">
+  <thead>
+  <th style="text-align: center">获奖文件</th>
+  <th style="text-align: center">个人简介</th>
+  <th style="text-align: center">教学计划</th>
+  <th style="text-align: center">年度总结</th>
+  </thead>
+  <tbody>
+  <tr>
+    <td>
+      <div class="layui-input-inline">
+        <input type="text" v-model="inputUserNumber" placeholder="教师号"
+               autocomplete="off"
+               class="layui-input">
+      </div>
+    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>
+      <button @click="queryFile(0)" class="layui-btn layui-btn-radius">查询</button>
+    </td>
+    <td>
+      <button @click="queryFile(1)" class="layui-btn layui-btn-radius">查询</button>
+    </td>
+    <td>
+      <button @click="queryFile(2)" class="layui-btn layui-btn-radius">查询</button>
+    </td>
+    <td>
+      <button @click="queryFile(3)" class="layui-btn layui-btn-radius">查询</button>
+    </td>
+  </tr>
+  <tr>
+    <td style="color: indianred">{{showFileType}}</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr v-for="(filename , index) in fileNames">
+    <td>
+      <button @click="download(index)" class="layui-btn layui-btn-radius layui-btn-primary"
+      > 下载
+      </button>
+    </td>
+    <td>
+      <button @click="del(index)" class="layui-btn layui-btn-radius layui-btn-danger"
+      >删除
+      </button>
+    </td>
+
+    <td>
+      <label>{{fileNames[index]}}</label>
+    </td>
+    <td>
+      <label>{{uploadTimes[index]}}</label>
+    </td>
+
+  </tr>
+  </tbody>
+
+</table>
+
+</body>
+<script src="/stuinfo/js/requestSchoolInfo.js"></script>
+<script src="/stuinfo/js/json2.js"></script>
+<script>
+  //注意：导航 依赖 element 模块，否则无法进行功能性操作
+  layui.use('element', function () {
+    var element = layui.element;
+
+//…
+  });
+  var layer;
+  layui.use('layer', function () {
+    layer = layui.layer;
+  });
+
+</script>
+
+<script>
+
+  function myAlert(content) {
+    layer.open({
+      title: '提示'
+      , content: content
+    });
+  }
+
+  var stuId = '';
+  var fileType = '';
+  var table_show_upload_id_vue = new Vue({
+    el: '#table_file_info_id',
+    data: {
+      fileNames: [],
+      fileUrls: [],
+      uploadTimes: [],
+      inputUserNumber: '',
+      showFileType: ''
+    },
+    methods: {
+      queryFile(index) {
+        if (this.inputUserNumber.trim()) {
+          $.post('/stuinfo/sctc/qis', {teacherNumber: this.inputUserNumber.trim()},
+              function (response) {
+                if (response && response.length > 0) {
+                  fileType = index;
+                  stuId = response[0].id;
+                  let formData = new FormData();
+                  formData.append('id', response[0].id);
+                  formData.append('teacherUploadType', index + '');
+                  queryFilesUrl(formData, index);
+                }
+              })
+        } else {
+          myAlert('输入教师号!!!');
+        }
+
+      },
+      download(index) {
+        let a = document.createElement('a');
+        a.download = this.fileNames[index];
+        a.href = this.fileUrls[index];
+        a.click();
+      },
+      del(index) {
+        if (stuId && fileType) {
+          if (confirm('确认删除文件:' + this.fileNames[index] + ' ?')) {
+            $.post('/stuinfo/stfc/df', {
+              id: stuId,
+              isTeacher: 0,
+              fileType: fileType,
+              url: this.fileUrls[index]
+            }, function (response) {
+            if (response) {
+
+          let tempArr = [[],[],[]];
+          function inner(arr, index,tempArrIndex) {
+            arr.forEach((value, i) => {
+              if (i !== index) {
+                tempArr[tempArrIndex].push(value);
+              }
+            })
+          }
+
+          inner(table_show_upload_id_vue.fileUrls,index,0);
+          inner(table_show_upload_id_vue.fileNames,index,1);
+          inner(table_show_upload_id_vue.uploadTimes,index,2);
+
+          table_show_upload_id_vue.fileNames = [];
+          table_show_upload_id_vue.uploadTimes = [];
+          table_show_upload_id_vue.fileUrls = [];
+
+          table_show_upload_id_vue.fileNames = tempArr[1];
+          table_show_upload_id_vue.fileUrls = tempArr[0];
+          table_show_upload_id_vue.uploadTimes = tempArr[2];
+          if (table_show_upload_id_vue.fileUrls.length == 0) {
+            table_show_upload_id_vue.showFileType = '';
+          }
+           }
+
+           })
+          }
+        }
+      }
+    }
+  });
+
+  function queryFilesUrl(formData, index) {
+    $.ajax({
+      type: "POST",
+      url: '/stuinfo/stfc/qfu',
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        if (response) {
+          if (response.length > 0) {
+            table_show_upload_id_vue.fileUrls = response;
+            let fileNames = [];
+            let uploadTimes = [];
+            for (let x of response) {
+              fileNames.push(x.split('filename=')[1]);
+              uploadTimes.push(x.split('&long=')[0].split('data=')[1]);
+            }
+            table_show_upload_id_vue.fileNames = fileNames;
+            table_show_upload_id_vue.uploadTimes = uploadTimes;
+            switch (index) {
+              case 0:
+                table_show_upload_id_vue.showFileType = '获奖文件';
+                break;
+              case 1:
+                table_show_upload_id_vue.showFileType = '个人简介';
+                break;
+              case 2:
+                table_show_upload_id_vue.showFileType = '教学计划';
+                break;
+              case 3:
+                table_show_upload_id_vue.showFileType = '年度总结';
+                break;
+            }
+          } else {
+            table_show_upload_id_vue.fileNames = [];
+            table_show_upload_id_vue.uploadTimes = [];
+            table_show_upload_id_vue.fileUrls = [];
+            table_show_upload_id_vue.showFileType='';
+            myAlert('未查询到任何数据!!!');
+          }
+        }
+      },
+      error: function (e) {
+      }
+    });
+  }
+</script>
+
+</html>

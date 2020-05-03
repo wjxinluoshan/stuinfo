@@ -8,10 +8,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -360,7 +358,7 @@ public class FileTool {
     //得到url包含的文件名信息
     String fileName = url.split("filename=")[1];
     //得到上传时间文件前缀
-    String time = url.split("filename=")[0].split("long=")[1];
+    String time = url.split("&filename=")[0].split("long=")[1];
     new File(rootFile, time + fileName).delete();
     return inputOutFilesUrl(rootFile, urlList);
   }
@@ -371,19 +369,14 @@ public class FileTool {
    * @param file
    */
   private void recursiveDelDir(File file) {
-    System.out.println("wjx");
     if (file == null) {
       return;
     }
     if (file.isFile()) {
-      System.out.println("file");
-
       file.delete();
       return;
     }
     if (file.isDirectory() && file.listFiles().length == 0) {
-      System.out.println("dir");
-
       file.delete();
       return;
     }
@@ -399,7 +392,7 @@ public class FileTool {
     for (File listFile : file.listFiles()) {
       recursiveDelDir(listFile);
     }
-    //删除跟文件夹
+    //删除根文件夹
     file.delete();
   }
 

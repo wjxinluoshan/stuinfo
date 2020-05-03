@@ -120,7 +120,7 @@ public class StuAndTeacController {
   public String delTeacherInfo(@RequestParam(required = false) String teacherNumber,
       @RequestParam(required = false) Integer id) throws IOException {
     stuAndTeacInfoMapperImple.deleteTeacherInfo(teacherNumber, id);
-   // fileTool.delFilesUrl(id,0,null,null);
+    fileTool.delFilesUrl(id,0,null,null);
     return "1";
   }
 

@@ -8,13 +8,18 @@
   <script src="/stuinfo/js/vue.js"></script>
   <script src="/stuinfo/js/jquery.min.js"></script>
   <script src="/stuinfo/js/json2.js"></script>
-
+  <style>
+    td{
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
 <ul style="text-align: center" class="layui-nav" id="nav_id" lay-filter="">
   <li class="layui-nav-item layui-this"><a id="a_welcom">欢迎页面</a></li>
   <li class="layui-nav-item"><a id="a_upload">上传</a></li>
   <li class="layui-nav-item"><a id="a_mine">我的</a></li>
+  <li class="layui-nav-item"><a id="a_student">学生信息</a></li>
 </ul>
 <iframe id="iframe_id" width="100%" src="/stuinfo/html/welcom.html?type=1"></iframe>
 <script>
@@ -27,58 +32,84 @@
   var layer;
   layui.use('layer', function () {
     layer = layui.layer;
+    /**
+     * 检查密码，如果密码为123456，则提示学生修改密码
+     */
+    $.post('/stuinfo/sctc/qis', {id: id}, function (response) {
+      console.log(response);
+      if (response) {
+        try {
+          if (response[0].teacherClass && parseInt(response[0].teacherClass) > 0) {
+            nav_id_vue.studentCanShow = true;
+            jumpPageToIframe('a_student', '/stuinfo/teacher/class_stu_manager.html?data='
+                + response[0].teacherClass);
+          } else {
+            $('#a_student').remove();
+          }
+          if (response[0].password === '123456') {
+            layer.prompt({
+              formType: 2,
+              value: '123456',
+              title: '请输入新密码(前后空格无效)',
+              area: ['300px', '50px'] //自定义文本域宽高
+            }, function (value, index, elem) {
+              if (value.trim()) {
+                let formData = new FormData();
+                formData.append('teacherInfo', JSON.stringify({password: value.trim()}));
+                formData.append('oldTeacherNumber', response[0].teacherNumber);
+                $.ajax({
+                  method: 'post',
+                  url: '/stuinfo/sctc/uti',
+                  data: formData,
+                  contentType: false,
+                  processData: false,
+                  success: function (response) {
+                    if (response) {
+                      myAlert('密码修改成功!!!');
+                    } else {
+                      myAlert('密码修改失败!!!');
+                    }
+                  }
+                });
+              }
+              layer.close(index);
+            });
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      }
+
+    });
   });
 </script>
 </body>
 <script>
   //根据url解析出id
   var id = window.location.href.split('=')[1];
-  /**
-   * 检查密码，如果密码为123456，则提示学生修改密码
-   */
-  $.post('/stuinfo/sctc/qis', {id: id}, function (response) {
-    console.log(response);
-    if (response) {
-      try {
-        if (response[0].password === '123456') {
-          layer.prompt({
-            formType: 2,
-            value: '123456',
-            title: '请输入新密码(前后空格无效)',
-            area: ['300px', '50px'] //自定义文本域宽高
-          }, function (value, index, elem) {
-            if (value.trim()) {
-              let formData = new FormData();
-              formData.append('teacherInfo', JSON.stringify({password: value.trim()}));
-              formData.append('oldTeacherNumber', response[0].teacherNumber);
-              $.ajax({
-                method: 'post',
-                url: '/stuinfo/sctc/uti',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function (response) {
-                  if (response) {
-                    myAlert('密码修改成功!!!');
-                  } else {
-                    myAlert('密码修改失败!!!');
-                  }
-                }
-              });
-            }
-            layer.close(index);
-          });
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    }
+  var nav_id_vue = new Vue({
+    el: '#nav_id',
+    data: {
+      studentCanShow: false,
+    },
+    updated: function () {
+      this.$nextTick(function () {
+        setTimeout(() => {
+          layui.use('element', function () {
+            var element = layui.element;
 
+            //…
+          });
+        }, 100);
+      })
+    },
+    methods: {}
   });
 
   $('#iframe_id').css('height', window.innerHeight - $('#nav_id').height() + 'px');
 
   var jumpPageToIframe = function (eleId, src) {
+    console.log('wjx')
     $('#' + eleId).on('click', () => {
       document.getElementById('iframe_id').src = src;
     });
@@ -90,9 +121,9 @@
   /**
    * 跳转到上传页面
    */
-  jumpPageToIframe('a_upload', '/stuinfo/teacher/upload.html?data='+id);
+  jumpPageToIframe('a_upload', '/stuinfo/teacher/upload.html?data=' + id);
   //跳转到我的管理页面
-  jumpPageToIframe('a_mine', '/stuinfo/teacher/mine.html?data='+id);
+  jumpPageToIframe('a_mine', '/stuinfo/teacher/mine.html?data=' + id);
 
   function myAlert(content) {
     layer.open({

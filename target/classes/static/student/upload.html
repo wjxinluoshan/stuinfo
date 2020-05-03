@@ -29,7 +29,7 @@
       <input type="file" accept="image/*,.doc,.docx" @change="choiceFiles" multiple id="0"/>
     </td>
     <td>
-      <button class="layui-btn layui-btn-radius layui-btn-primary" id="btn_upload_id" disabled
+      <button class="layui-btn layui-btn-radius layui-btn-primary" id="btn_upload_id" value="1"
               @click="uploadClick(0)">上传
       </button>
     </td>
@@ -135,21 +135,33 @@
    * 选择文件的监听事件
    */
   var uploadFiles = ['', '', '', ''];
+
   /**
    * 检测上传获奖文件是否有权限
    */
-  $.post('/stuinfo/sctc/qifp', function (response) {
-    if (response) {
-      //学生
-      console.log(response);
-      //0就是关闭
-      if (response.split(',')[0] == 1) {
-        $('#btn_upload_id').removeAttr('disable');
-      } else {
-        $('#btn_upload_id').html('暂未开启，不可操作')
-      }
-    }
-  });
+  function queryPrizeUpload() {
+    return new Promise((resolve, reject) => {
+      $.post('/stuinfo/sctc/qifp', function (response) {
+        if (response) {
+          //学生
+          console.log(response);
+          //0就是关闭
+          if (response.split(',')[0] == 1) {
+            $('#btn_upload_id').val(1);
+            resolve(true);
+          } else {
+            $('#btn_upload_id').val(0);
+            $('#btn_upload_id').html('暂未开启，不可操作')
+          }
+        } else {
+          resolve(false);
+        }
+
+      });
+    });
+  }
+
+  queryPrizeUpload();
 
   var table_info_id_vue = new Vue({
     el: "#table_info_id",
@@ -179,7 +191,14 @@
         switch (index) {
             //获奖经历
           case 0:
-            inner(0);
+            if ($('#btn_upload_id').val() == 1) {
+              queryPrizeUpload().then(value => {
+                if (value) {
+                  inner(0);
+                }
+              })
+            }
+
             break;
             //个人简介
           case 1:
@@ -255,7 +274,7 @@
   var table_show_upload_id_vue = new Vue({
     el: '#table_show_upload_id',
     data: {
-      filename:'文件名',
+      filename: '文件名',
       uploadTimes: [],
       fileNames: [],
       fileUrls: []
