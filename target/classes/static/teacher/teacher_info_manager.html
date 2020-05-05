@@ -216,7 +216,23 @@
             studentCondition.teacherClass = this.inputStuClass.trim();
           }
           if (this.inputDepart.trim()) {
-            studentCondition.depart = this.inputDepart.trim();
+            //查询系信息
+            $.ajax({
+              method: 'post',
+              url: '/stuinfo/sic/qds',
+              async: false,
+              data: {depart: this.inputDepart.trim()},
+              success: function (response) {
+                if (response && response.length > 0) {
+                  studentCondition.depart = response[0].id;
+                } else {
+                  studentCondition.depart = 0;
+                }
+              },
+              error: function () {
+                studentCondition.depart = 0;
+              }
+            });
           }
           if (this.inputSchoolYear.trim()) {
             studentCondition.inSchoolYear = this.inputSchoolYear.trim();
@@ -265,7 +281,6 @@
               table_info_show_id_vue.departInDeparts = outerDepartInDeparts;
 
             }
-            ;
           } else {
             table_info_show_id_vue.stuNumbers = [];
             myAlert('没有满足以上条件的数据!!!')
@@ -334,6 +349,12 @@
                             table_info_show_id_vue.departs[index])], index,
                         true);
                   }
+                } else {
+                  let index = select.elem.id.split('id')[1];
+                  queryDepart(
+                      collegeIds[outerColleges.indexOf(table_info_show_id_vue.colleges[index])],
+                      undefined, index,
+                      true);
                 }
               });
             }
@@ -409,6 +430,15 @@
           }
         }
 
+        // if ($('#change_depart_id' + index).val()) {
+        //   if ($('#change_depart_id' + index).val() !== this.colleges[index]) {
+        //     if (!$('#change_college_id' + index).val()) {
+        //       myAlert('换系必须选学院!!!');
+        //       return;
+        //     }
+        //   }
+        // }
+
         if (!$('#change_college_id' + index).val()) {
           stuInfo.college = collegeIds[outerColleges.indexOf(this.colleges[index])];
         } else {
@@ -422,7 +452,6 @@
           stuInfo.depart = departInDepartsIds[index][outerDepartInDeparts[index].indexOf(
               $('#change_depart_id' + index).val())];
         }
-
         /**
          * 修改信息
          */
@@ -533,6 +562,7 @@
               tempDeparts[departIndex] = a;
 
               if (!partQuery) {
+                table_info_show_id_vue.departs[index] = 0;
                 table_info_show_id_vue.departs[index] = tempDeparts[0];
               }
 
@@ -572,7 +602,6 @@
               }
 
               inner();
-
               outerDepartInDeparts[index] = tempDeparts;
               departInDepartsDependCollegeIds[index] = tempDependCollegeIds;
               departInDepartsIds[index] = tempDepartIds;

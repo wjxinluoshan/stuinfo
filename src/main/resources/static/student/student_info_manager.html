@@ -216,7 +216,23 @@
             studentCondition.stuClass = this.inputStuClass.trim();
           }
           if (this.inputDepart.trim()) {
-            studentCondition.depart = this.inputDepart.trim();
+            //查询系信息
+            $.ajax({
+              method: 'post',
+              url: '/stuinfo/sic/qds',
+              async: false,
+              data: {depart: this.inputDepart.trim()},
+              success: function (response) {
+                if (response && response.length > 0) {
+                  studentCondition.depart = response[0].id;
+                } else {
+                  studentCondition.depart = 0;
+                }
+              },
+              error: function () {
+                studentCondition.depart = 0;
+              }
+            });
           }
           if (this.inputSchoolYear.trim()) {
             studentCondition.inSchoolYear = this.inputSchoolYear.trim();
@@ -252,22 +268,19 @@
               queryDepart(obj.college, obj.depart, index);
             });
             if (t1.length > 0) {
+              table_info_show_id_vue.stuNumbers = [];
               table_info_show_id_vue.stuNumbers = t1;
               table_info_show_id_vue.stuClasses = t2;
               table_info_show_id_vue.names = t3;
               table_info_show_id_vue.passwords = t4;
-              // table_info_show_id_vue.collegeIds = t5;
-              // table_info_show_id_vue.departInDepartsIds = t6;
               table_info_show_id_vue.phones = t7;
               table_info_show_id_vue.inSchoolYears = t8;
               table_info_show_id_vue.ids = t9;
               table_info_show_id_vue.collegeInColleges = outerCollegeInColleges;
               table_info_show_id_vue.departInDeparts = outerDepartInDeparts;
-
             }
-            ;
           } else {
-            table_info_show_id_vue.stuNumbers=[];
+            table_info_show_id_vue.stuNumbers = [];
             myAlert('没有满足以上条件的数据!!!')
           }
           return;
@@ -334,6 +347,12 @@
                             table_info_show_id_vue.departs[index])], index,
                         true);
                   }
+                } else {
+                  let index = select.elem.id.split('id')[1];
+                  queryDepart(
+                      collegeIds[outerColleges.indexOf(table_info_show_id_vue.colleges[index])],
+                      undefined, index,
+                      true);
                 }
               });
             }
@@ -411,6 +430,15 @@
           }
         }
 
+        // if ($('#change_depart_id' + index).val()) {
+        //   if ($('#change_depart_id' + index).val() !== this.colleges[index]) {
+        //     if (!$('#change_college_id' + index).val()) {
+        //       myAlert('换系必须选学院!!!');
+        //       return;
+        //     }
+        //   }
+        // }
+
         if (!$('#change_college_id' + index).val()) {
           stuInfo.college = collegeIds[outerColleges.indexOf(this.colleges[index])];
         } else {
@@ -440,7 +468,8 @@
           processData: false,
           success: function (response) {
             if (response) {
-              if ($('#stuNumber' + index).val().trim() !== table_info_show_id_vue.stuNumbers[index]) {
+              if ($('#stuNumber' + index).val().trim()
+                  !== table_info_show_id_vue.stuNumbers[index]) {
                 table_info_show_id_vue.stuNumbers[index] = $('#stuNumber' + index).val().trim();
               }
               table_info_id_vue.queryUserInfo(1);
@@ -510,6 +539,7 @@
       async: false,
       success: function (departs) {
         if (departs) {
+
           let tempDeparts = [];
           let tempDependCollegeIds = [];
           let tempDepartIds = [];
@@ -556,7 +586,7 @@
               outerDepartInDeparts[index] = tempDeparts;
               departInDepartsDependCollegeIds[index] = tempDependCollegeIds;
               departInDepartsIds[index] = tempDepartIds;
-              console.log(outerDepartInDeparts[index]);
+              // console.log(outerDepartInDeparts[index]);
               table_info_show_id_vue.departInDeparts = [];
               table_info_show_id_vue.departInDeparts = outerDepartInDeparts;
             }

@@ -2,43 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14dbec59-18af-4c74-a09f-c404794f176b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/show/admin_teacher_file_manager.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/teacher/class_stu_manager.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/controller/StuAndTeacController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/controller/StuAndTeacController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/tool/FileTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/tool/FileTool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/html/student.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/html/student.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/html/teacher.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/html/teacher.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/show/adminstudent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/show/adminstudent.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/show/adminteacher.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/show/adminteacher.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/student/mine.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/student/mine.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/student/query_stu_archive.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/mapperimpl/SchoolInfoMapperImple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/mapperimpl/SchoolInfoMapperImple.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/school/school_manager.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/school/school_manager.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/student/student_info_manager.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/student/student_info_manager.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/student/upload.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/student/upload.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/teacher/mine.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/teacher/mine.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/teacher/query_teacher_info.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/teacher/teacher_info_manager.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/teacher/teacher_info_manager.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/teacher/upload.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/teacher/upload.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/controller/StuAndTeacController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/controller/StuAndTeacController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/tool/FileTool$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/tool/FileTool$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/tool/FileTool$Excel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/tool/FileTool$Excel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/tool/FileTool.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/tool/FileTool.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/html/student.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/html/student.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/html/teacher.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/html/teacher.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/show/adminstudent.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/show/adminstudent.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/show/adminteacher.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/show/adminteacher.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/student/mine.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/student/mine.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/student/query_stu_archive.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/mapperimpl/SchoolInfoMapperImple.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/yzt/manager/stuinfo/mapperimpl/SchoolInfoMapperImple.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/school/school_manager.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/school/school_manager.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/student/student_info_manager.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/student/student_info_manager.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/student/upload.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/student/upload.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/teacher/mine.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/teacher/mine.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/teacher/query_teacher_info.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/teacher/teacher_info_manager.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/teacher/teacher_info_manager.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/teacher/upload.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/teacher/upload.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/teacher/uploadFile/2/introduce/1588427425070detail.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/teacher/uploadFile/2/introduce/url.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/teacher/uploadFile/2/tPlan/url.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/teacher/uploadFile/2/yReport/url.obj" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -265,6 +237,10 @@
       <workItem from="1588337008104" duration="6503000" />
       <workItem from="1588380742963" duration="34692000" />
       <workItem from="1588467568999" duration="15748000" />
+      <workItem from="1588560277941" duration="1448000" />
+      <workItem from="1588561796600" duration="171000" />
+      <workItem from="1588576762434" duration="2040000" />
+      <workItem from="1588645694506" duration="9832000" />
     </task>
     <servers />
   </component>
@@ -292,58 +268,58 @@
       <screen x="0" y="31" width="1280" height="689" />
     </state>
     <state x="421" y="132" key="FileChooserDialogImpl/0.31.1280.689@0.31.1280.689" timestamp="1587975492661" />
-    <state width="1237" height="318" key="GridCell.Tab.0.bottom" timestamp="1588498910701">
+    <state width="1237" height="183" key="GridCell.Tab.0.bottom" timestamp="1588655613561">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="318" key="GridCell.Tab.0.bottom/0.31.1280.689@0.31.1280.689" timestamp="1588498910701" />
-    <state width="1237" height="318" key="GridCell.Tab.0.center" timestamp="1588498910701">
+    <state width="1237" height="183" key="GridCell.Tab.0.bottom/0.31.1280.689@0.31.1280.689" timestamp="1588655613561" />
+    <state width="1237" height="183" key="GridCell.Tab.0.center" timestamp="1588655613561">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="318" key="GridCell.Tab.0.center/0.31.1280.689@0.31.1280.689" timestamp="1588498910701" />
-    <state width="1237" height="318" key="GridCell.Tab.0.left" timestamp="1588498910701">
+    <state width="1237" height="183" key="GridCell.Tab.0.center/0.31.1280.689@0.31.1280.689" timestamp="1588655613561" />
+    <state width="1237" height="183" key="GridCell.Tab.0.left" timestamp="1588655613561">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="318" key="GridCell.Tab.0.left/0.31.1280.689@0.31.1280.689" timestamp="1588498910701" />
-    <state width="1237" height="318" key="GridCell.Tab.0.right" timestamp="1588498910701">
+    <state width="1237" height="183" key="GridCell.Tab.0.left/0.31.1280.689@0.31.1280.689" timestamp="1588655613561" />
+    <state width="1237" height="183" key="GridCell.Tab.0.right" timestamp="1588655613561">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="318" key="GridCell.Tab.0.right/0.31.1280.689@0.31.1280.689" timestamp="1588498910701" />
-    <state width="1237" height="318" key="GridCell.Tab.1.bottom" timestamp="1588498910702">
+    <state width="1237" height="183" key="GridCell.Tab.0.right/0.31.1280.689@0.31.1280.689" timestamp="1588655613561" />
+    <state width="1237" height="183" key="GridCell.Tab.1.bottom" timestamp="1588655613562">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="318" key="GridCell.Tab.1.bottom/0.31.1280.689@0.31.1280.689" timestamp="1588498910702" />
-    <state width="1237" height="318" key="GridCell.Tab.1.center" timestamp="1588498910701">
+    <state width="1237" height="183" key="GridCell.Tab.1.bottom/0.31.1280.689@0.31.1280.689" timestamp="1588655613562" />
+    <state width="1237" height="183" key="GridCell.Tab.1.center" timestamp="1588655613562">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="318" key="GridCell.Tab.1.center/0.31.1280.689@0.31.1280.689" timestamp="1588498910701" />
-    <state width="1237" height="318" key="GridCell.Tab.1.left" timestamp="1588498910701">
+    <state width="1237" height="183" key="GridCell.Tab.1.center/0.31.1280.689@0.31.1280.689" timestamp="1588655613562" />
+    <state width="1237" height="183" key="GridCell.Tab.1.left" timestamp="1588655613562">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="318" key="GridCell.Tab.1.left/0.31.1280.689@0.31.1280.689" timestamp="1588498910701" />
-    <state width="1237" height="318" key="GridCell.Tab.1.right" timestamp="1588498910701">
+    <state width="1237" height="183" key="GridCell.Tab.1.left/0.31.1280.689@0.31.1280.689" timestamp="1588655613562" />
+    <state width="1237" height="183" key="GridCell.Tab.1.right" timestamp="1588655613562">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="318" key="GridCell.Tab.1.right/0.31.1280.689@0.31.1280.689" timestamp="1588498910701" />
-    <state width="1237" height="318" key="GridCell.Tab.2.bottom" timestamp="1588498910702">
+    <state width="1237" height="183" key="GridCell.Tab.1.right/0.31.1280.689@0.31.1280.689" timestamp="1588655613562" />
+    <state width="1237" height="233" key="GridCell.Tab.2.bottom" timestamp="1588646916422">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="318" key="GridCell.Tab.2.bottom/0.31.1280.689@0.31.1280.689" timestamp="1588498910702" />
-    <state width="1237" height="318" key="GridCell.Tab.2.center" timestamp="1588498910702">
+    <state width="1237" height="233" key="GridCell.Tab.2.bottom/0.31.1280.689@0.31.1280.689" timestamp="1588646916422" />
+    <state width="1237" height="233" key="GridCell.Tab.2.center" timestamp="1588646916422">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="318" key="GridCell.Tab.2.center/0.31.1280.689@0.31.1280.689" timestamp="1588498910702" />
-    <state width="1237" height="318" key="GridCell.Tab.2.left" timestamp="1588498910702">
+    <state width="1237" height="233" key="GridCell.Tab.2.center/0.31.1280.689@0.31.1280.689" timestamp="1588646916422" />
+    <state width="1237" height="233" key="GridCell.Tab.2.left" timestamp="1588646916422">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="318" key="GridCell.Tab.2.left/0.31.1280.689@0.31.1280.689" timestamp="1588498910702" />
-    <state width="1237" height="318" key="GridCell.Tab.2.right" timestamp="1588498910702">
+    <state width="1237" height="233" key="GridCell.Tab.2.left/0.31.1280.689@0.31.1280.689" timestamp="1588646916422" />
+    <state width="1237" height="233" key="GridCell.Tab.2.right" timestamp="1588646916422">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state width="1237" height="318" key="GridCell.Tab.2.right/0.31.1280.689@0.31.1280.689" timestamp="1588498910702" />
-    <state x="342" y="201" key="com.intellij.ide.util.TipDialog" timestamp="1588467576544">
+    <state width="1237" height="233" key="GridCell.Tab.2.right/0.31.1280.689@0.31.1280.689" timestamp="1588646916422" />
+    <state x="342" y="201" key="com.intellij.ide.util.TipDialog" timestamp="1588645755305">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
-    <state x="342" y="201" key="com.intellij.ide.util.TipDialog/0.31.1280.689@0.31.1280.689" timestamp="1588467576544" />
+    <state x="342" y="201" key="com.intellij.ide.util.TipDialog/0.31.1280.689@0.31.1280.689" timestamp="1588645755305" />
     <state x="455" y="294" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588469279416">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
@@ -372,6 +348,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/mapperimpl/SchoolInfoMapperImple.java</url>
           <line>44</line>
           <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/yzt/manager/stuinfo/controller/SchoolInfoController.java</url>
+          <line>88</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

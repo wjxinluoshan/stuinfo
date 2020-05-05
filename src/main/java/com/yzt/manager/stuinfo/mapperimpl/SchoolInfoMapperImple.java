@@ -114,10 +114,11 @@ public class SchoolInfoMapperImple implements SchoolInfoMapper {
     if ((newDepart == null && newCollegeId == null) || depart == null) {
       return null;
     }
+
     if (schoolInfoMapper.selectDepart(null, newDepart).isEmpty()) {
-      return schoolInfoMapper.updateDepart(depart, newDepart, newCollegeId);
+      return -1;
     }
-    return -1;
+    return schoolInfoMapper.updateDepart(depart, newDepart, newCollegeId);
   }
 
   @Override

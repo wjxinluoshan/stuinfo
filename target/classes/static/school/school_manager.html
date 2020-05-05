@@ -168,7 +168,7 @@
        * 删除系
        */
       delDepart(index) {
-        if (confirm('确定删除---' + this.delDepart[index])) {
+        if (confirm('确定删除---' + this.departs[index])) {
           $.post('/stuinfo/sic/deld', {depart: this.departs[index]}, function (response) {
             if (response) {
               outerDeparts.splice(index, 1);
